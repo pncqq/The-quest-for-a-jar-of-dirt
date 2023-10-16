@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
 public class BasicPlayerMovement : MonoBehaviour
 {
     //Compontents
@@ -10,14 +9,14 @@ public class BasicPlayerMovement : MonoBehaviour
     private SpriteRenderer _sprite;
 
     //Movement
-    [SerializeField] private float _speed = 5;
-    [SerializeField] private float _jumpForce = 5;
+    [SerializeField] private float speed = 5;
+    [SerializeField] private float jumpForce = 5;
     private float _xInput;
+    private float _jumpInput;
     private bool _performJump;
     private bool _isGrounded;
 
     //Animator
-    private static readonly int XVelocity = Animator.StringToHash("xVelocity");
     private static readonly int YVelocity = Animator.StringToHash("yVelocity");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
@@ -34,6 +33,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private void Update()
     {
         _xInput = Input.GetAxisRaw("Horizontal");
+        _jumpInput = Input.GetAxisRaw("Jump");
 
         //Jump check
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -45,26 +45,47 @@ public class BasicPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Variables
-        var velocity = new Vector2(_xInput * _speed, _rb.velocity.y);
+        var velocity = new Vector2(_xInput * speed, _rb.velocity.y);
         var isMoving = velocity.x != 0;
 
-        //Left-right movement & sprite orientation
+        //Move
         _rb.velocity = velocity;
-        if (velocity.x != 0)
-        {
-            var isFacingRight = velocity.x > 0 ? 1 : 0;
-            _sprite.flipX = isFacingRight != 1;
-        }
+
+        //Flip sprite
+        Flip();
 
         //Jumping
-        if (_performJump)
-        {
-            _performJump = false;
-            _rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
-        }
+        PlayerJump();
 
         //UpdateAnimation
         UpdateAnimation(velocity, isMoving);
+    }
+
+    private void PlayerJump()
+    {
+        if (_performJump)
+        {
+            _performJump = false;
+            _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void Flip()
+    {
+        //Left-right movement & sprite orientation
+        if (_xInput == 0) return;
+
+        var isFacingRight = _xInput > 0 ? 1 : 0;
+        _sprite.flipX = isFacingRight != 1;
+    }
+
+
+    private void UpdateAnimation(Vector2 velocity, bool isMoving)
+    {
+        //Animator variables
+        _animator.SetFloat(YVelocity, velocity.y);
+        _animator.SetBool(IsMoving, isMoving);
+        _animator.SetBool(IsJumping, !_isGrounded);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -75,15 +96,6 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        _isGrounded = false;
-    }
-
-    private void UpdateAnimation(Vector2 velocity, bool isMoving)
-    {
-        //Animator variables
-        _animator.SetFloat(XVelocity, velocity.x);
-        _animator.SetFloat(YVelocity, velocity.y);
-        _animator.SetBool(IsMoving, isMoving);
-        _animator.SetBool(IsJumping, !_isGrounded);
+        if (_jumpInput != 0) _isGrounded = false;
     }
 }
