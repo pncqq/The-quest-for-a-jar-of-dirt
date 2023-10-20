@@ -148,6 +148,18 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 659784631}
+--- !u!114 &21269227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21269212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4431ae65be0e7fd40bd1a890de5e939d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &43402764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25604,15 +25616,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3367950875114386259, guid: fc76b07c44ab73043b73385e7bb2d538, type: 3}
       insertIndex: 6
       addedObject: {fileID: 21269220}
+    - targetCorrespondingSourceObject: {fileID: 3367950875114386259, guid: fc76b07c44ab73043b73385e7bb2d538, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 21269227}
   m_SourcePrefab: {fileID: 100100000, guid: fc76b07c44ab73043b73385e7bb2d538, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 7020499052472453092}
+  - {fileID: 5627322359860549324}
   - {fileID: 221185719003127133}
   - {fileID: 479584815}
   - {fileID: 1874231700}
   - {fileID: 1636228720}
   - {fileID: 149847097}
-  - {fileID: 5627322359860549324}
