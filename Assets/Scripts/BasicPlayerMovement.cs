@@ -15,6 +15,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _jumpInput;
     private bool _performJump;
     private bool _isGrounded;
+    public bool isFacingRight;
 
     //Animator
     private static readonly int YVelocity = Animator.StringToHash("yVelocity");
@@ -77,6 +78,9 @@ public class BasicPlayerMovement : MonoBehaviour
 
         var isFacingRight = _xInput > 0 ? 1 : 0;
         _sprite.flipX = isFacingRight != 1;
+        
+        //Initialize public field
+        this.isFacingRight = isFacingRight == 1;
     }
 
 
