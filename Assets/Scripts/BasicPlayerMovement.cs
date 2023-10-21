@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
 public class BasicPlayerMovement : MonoBehaviour
@@ -16,10 +17,21 @@ public class BasicPlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 5;
     private float _xInput;
     private float _jumpInput;
-    private bool _performJump;
-    private bool _isGrounded;
     private bool _doubleJump;
+    private bool isFacingRight = true;
+    
+    
+    private bool isWallSliding;
+    private float wallSlidingSpeed = 2;
+    private bool isWallJumping;
+    private float wallJumpingDirection;
+    private float wallJumpingTime = 0.2f;
+    private float walljumpingCounter;
+    private float wallJumpingDuration = 0.4f;
+    private Vector2 wallJumpingPower = new Vector2(8f, 8f);
 
+    
+    [SerializeField] private Transform wallCheck;
     //Animator
     private static readonly int YVelocity = Animator.StringToHash("yVelocity");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
@@ -40,6 +52,8 @@ public class BasicPlayerMovement : MonoBehaviour
         _xInput = Input.GetAxisRaw("Horizontal");
         _jumpInput = Input.GetAxisRaw("Jump");
 
+        
+
         if (IsGrounded() && !Input.GetButton("Jump"))
         {
             _doubleJump = false;
@@ -53,13 +67,72 @@ public class BasicPlayerMovement : MonoBehaviour
                 _doubleJump = !_doubleJump;
             }
             
-        } 
+        }
+        WallSlide();
+        WallJump();
     }
     private bool IsGrounded()
     {
         return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 
+    private bool IsWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, jumpableGround);
+    }
+
+    private void WallSlide()
+    {
+        if (IsWalled() && !IsGrounded() && _xInput != 0f)
+        {
+            isWallSliding = true;
+            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+    }
+
+    private void WallJump()
+    {
+        if (isWallSliding)
+        {
+            isWallJumping = false;
+            wallJumpingDirection = -transform.localScale.x;
+            walljumpingCounter = wallJumpingTime;
+        }
+        else
+        {
+            walljumpingCounter -= Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") && walljumpingCounter > 0)
+        {
+            isWallJumping = true;
+            _rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            walljumpingCounter = 0f;
+
+            if (transform.localScale.x != wallJumpingDirection)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 localScale = transform.localScale;
+                localScale.x *= -1f;
+                transform.localScale = localScale;
+            }
+            
+        }
+
+    }
+    
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
+    }
+
+
+  
+    
     private void FixedUpdate()
     {
         //Variables
@@ -68,33 +141,31 @@ public class BasicPlayerMovement : MonoBehaviour
 
         //Move
         _rb.velocity = velocity;
+        
+        if (!isWallJumping)
+        {
+            _rb.velocity = new Vector2(_xInput * speed, _rb.velocity.y);
+        }
 
         //Flip sprite
         Flip();
-
-        //Jumping
-        /*PlayerJump();*/
 
         //UpdateAnimation
         UpdateAnimation(velocity, isMoving);
     }
 
-    /*private void PlayerJump()
-    {
-        if (_performJump)
-        {
-            _performJump = false;
-            _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-        }
-    }*/
+
 
     private void Flip()
     {
         //Left-right movement & sprite orientation
-        if (_xInput == 0) return;
-
-        var isFacingRight = _xInput > 0 ? 1 : 0;
-        _sprite.flipX = isFacingRight != 1;
+        if (isFacingRight && _xInput < 0f || !isFacingRight && _xInput > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 
 
@@ -106,16 +177,7 @@ public class BasicPlayerMovement : MonoBehaviour
         _animator.SetBool(IsJumping, !IsGrounded());
     }
 
-    /*private void OnCollisionEnter2D(Collision2D other)
-    {
-        _isGrounded = IsGrounded();
-    }
 
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (_jumpInput != 0) _isGrounded = false;
-    }*/
 
 
 }
