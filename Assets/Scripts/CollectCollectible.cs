@@ -4,14 +4,20 @@ using UnityEngine;
 public class CollectCollectible : MonoBehaviour
 {
     [SerializeField] private int _val = 1;
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            Debug.Log(gameObject.tag);
+            _animator.SetBool("IsCollected", true);
+            
             switch (gameObject.tag)
             {
                 case "GoldCoin":
@@ -29,5 +35,10 @@ public class CollectCollectible : MonoBehaviour
             }
             
         }
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 }
