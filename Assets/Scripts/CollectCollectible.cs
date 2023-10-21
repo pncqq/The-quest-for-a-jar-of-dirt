@@ -15,13 +15,16 @@ public class CollectCollectible : MonoBehaviour
             switch (gameObject.tag)
             {
                 case "GoldCoin":
-                    CollectibleCounter.instance.IncreaseCoinCount(_val, 'g');
+                    CollectibleCounter.instance.IncreaseCount(_val, 'g');
                     break;
                 case "SilverCoin":
-                    CollectibleCounter.instance.IncreaseCoinCount(_val, 's');
+                    CollectibleCounter.instance.IncreaseCount(_val, 's');
                     break;
                 case "Diamond":
-                    CollectibleCounter.instance.IncreaseCoinCount(_val, 'd');
+                    CollectibleCounter.instance.IncreaseCount(_val, 'd');
+                    break;
+                case "Key":
+                    CollectibleCounter.instance.IncreaseCount(_val, 'k');
                     break;
             }
             

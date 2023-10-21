@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 public class ChestInteract : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class ChestInteract : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                chest.openChest();
+                chest.Open();
                
 
             }

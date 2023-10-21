@@ -4,9 +4,10 @@ using TMPro;
 public class CollectibleCounter : MonoBehaviour
 {
     public static CollectibleCounter instance;
-    [SerializeField] private int gCoinCount;
+    public int gCoinCount;
     [SerializeField] private int sCoinCount;
     [SerializeField] private int dCount;
+    public int kCount;
     [SerializeField] private TMP_Text coinText;
 
     // Start is called before the first frame update
@@ -16,10 +17,10 @@ public class CollectibleCounter : MonoBehaviour
     }
     void Start()
     {
-        coinText.text = "G. C.: " + gCoinCount.ToString() + " S. C.: " + sCoinCount.ToString() + " D: " + dCount.ToString();
+        coinText.text = "G. C.: " + gCoinCount.ToString() + " S. C.: " + sCoinCount.ToString() + " D: " + dCount.ToString() + " K: " + kCount.ToString();
     }
 
-    public void IncreaseCoinCount(int val, char type)
+    public void IncreaseCount(int val, char type)
     {
         switch (type)
         {
@@ -32,7 +33,17 @@ public class CollectibleCounter : MonoBehaviour
             case 'd':
                 dCount += val;
                 break;
+            case 'k':
+                kCount += val;
+                break;
         }
-        coinText.text = "G. C.: " + gCoinCount.ToString() + " S. C.: " + sCoinCount.ToString() + " D: " + dCount.ToString();
+        coinText.text = "G. C.: " + gCoinCount.ToString() + " S. C.: " + sCoinCount.ToString() + " D: " + dCount.ToString() + " K: " + kCount.ToString();
     }
+
+    public void UseKey()
+    {
+        kCount--;
+        coinText.text = "G. C.: " + gCoinCount.ToString() + " S. C.: " + sCoinCount.ToString() + " D: " + dCount.ToString() + " K: " + kCount.ToString();
+    }
+    
 }
