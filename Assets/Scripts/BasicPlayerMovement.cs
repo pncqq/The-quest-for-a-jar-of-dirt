@@ -7,6 +7,9 @@ public class BasicPlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _animator;
     private SpriteRenderer _sprite;
+    private BoxCollider2D  _boxCollider2D;
+
+    [SerializeField] private LayerMask jumpableGround;
 
     //Movement
     [SerializeField] private float speed = 5;
@@ -27,6 +30,7 @@ public class BasicPlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
+        _boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     //Update is called once per frame
@@ -36,7 +40,7 @@ public class BasicPlayerMovement : MonoBehaviour
         _jumpInput = Input.GetAxisRaw("Jump");
 
         //Jump check
-        if (Input.GetButtonDown("Jump") && _isGrounded)
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             _performJump = true;
         }
@@ -85,17 +89,22 @@ public class BasicPlayerMovement : MonoBehaviour
         //Animator variables
         _animator.SetFloat(YVelocity, velocity.y);
         _animator.SetBool(IsMoving, isMoving);
-        _animator.SetBool(IsJumping, !_isGrounded);
+        _animator.SetBool(IsJumping, !IsGrounded());
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        _isGrounded = true;
+        _isGrounded = IsGrounded();
     }
 
 
     private void OnCollisionExit2D(Collision2D other)
     {
         if (_jumpInput != 0) _isGrounded = false;
+    }
+
+    private bool IsGrounded()
+    {
+       return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 }
