@@ -18,6 +18,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _jumpInput;
     private bool _performJump;
     private bool _isGrounded;
+    private bool _doubleJump;
 
     //Animator
     private static readonly int YVelocity = Animator.StringToHash("yVelocity");
@@ -39,11 +40,24 @@ public class BasicPlayerMovement : MonoBehaviour
         _xInput = Input.GetAxisRaw("Horizontal");
         _jumpInput = Input.GetAxisRaw("Jump");
 
-        //Jump check
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (IsGrounded() && !Input.GetButton("Jump"))
         {
-            _performJump = true;
+            _doubleJump = false;
         }
+        //Jump check
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (IsGrounded()|| _doubleJump)
+            {
+                _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                _doubleJump = !_doubleJump;
+            }
+            
+        } 
+    }
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 
     private void FixedUpdate()
@@ -59,20 +73,20 @@ public class BasicPlayerMovement : MonoBehaviour
         Flip();
 
         //Jumping
-        PlayerJump();
+        /*PlayerJump();*/
 
         //UpdateAnimation
         UpdateAnimation(velocity, isMoving);
     }
 
-    private void PlayerJump()
+    /*private void PlayerJump()
     {
         if (_performJump)
         {
             _performJump = false;
             _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
-    }
+    }*/
 
     private void Flip()
     {
@@ -92,7 +106,7 @@ public class BasicPlayerMovement : MonoBehaviour
         _animator.SetBool(IsJumping, !IsGrounded());
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    /*private void OnCollisionEnter2D(Collision2D other)
     {
         _isGrounded = IsGrounded();
     }
@@ -101,10 +115,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         if (_jumpInput != 0) _isGrounded = false;
-    }
+    }*/
 
-    private bool IsGrounded()
-    {
-       return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
-    }
+
 }

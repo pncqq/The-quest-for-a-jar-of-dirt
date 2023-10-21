@@ -4021,7 +4021,7 @@ GameObject:
   - component: {fileID: 851381582}
   - component: {fileID: 851381581}
   - component: {fileID: 851381580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dropdown Platforms
   m_TagString: DropdownPlatform
   m_Icon: {fileID: 0}
