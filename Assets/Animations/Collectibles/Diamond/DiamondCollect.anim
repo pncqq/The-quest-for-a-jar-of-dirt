@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Coin Anim
+  m_Name: DiamondCollect
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 60ca4d7b1567d0a4ab9d1c926d2a6850, type: 3}
+      value: {fileID: 21300000, guid: d7aafd541f0d48646b765e06752956bf, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: dd2238b88fe72134d8275b894f5dfe2a, type: 3}
+      value: {fileID: 21300000, guid: b593b0af0fb8e1e4aa23e327233a0b09, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 7104b540047885941ab2015d3c7d37d2, type: 3}
+      value: {fileID: 21300000, guid: 0091705dfc6afd2468be75a05c44181c, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: e3a858656c9c5734d8b449e8d839ac92, type: 3}
+      value: {fileID: 21300000, guid: 96813c5f0b0000a488a1a447ebdaa225, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 60ca4d7b1567d0a4ab9d1c926d2a6850, type: 3}
-    - {fileID: 21300000, guid: dd2238b88fe72134d8275b894f5dfe2a, type: 3}
-    - {fileID: 21300000, guid: 7104b540047885941ab2015d3c7d37d2, type: 3}
-    - {fileID: 21300000, guid: e3a858656c9c5734d8b449e8d839ac92, type: 3}
+    - {fileID: 21300000, guid: d7aafd541f0d48646b765e06752956bf, type: 3}
+    - {fileID: 21300000, guid: b593b0af0fb8e1e4aa23e327233a0b09, type: 3}
+    - {fileID: 21300000, guid: 0091705dfc6afd2468be75a05c44181c, type: 3}
+    - {fileID: 21300000, guid: 96813c5f0b0000a488a1a447ebdaa225, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -78,4 +78,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.25
+    functionName: DestroyMe
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

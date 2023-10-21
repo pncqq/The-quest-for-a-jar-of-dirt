@@ -6,6 +6,10 @@ TagManager:
   tags:
   - DropdownPlatform
   - GoldCoin
+  - SilverCoin
+  - Diamond
+  - Key
+  - LockedChest
   layers:
   - Default
   - TransparentFX
