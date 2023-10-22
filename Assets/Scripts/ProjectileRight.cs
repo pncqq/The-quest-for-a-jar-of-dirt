@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileRight : MonoBehaviour
 {
     
     [SerializeField] private float _speed;
@@ -18,7 +19,7 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        _rb.velocity = -transform.right * _speed;
+            _rb.velocity = transform.right * _speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
