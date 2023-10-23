@@ -10,6 +10,7 @@ public class TotemShoot : MonoBehaviour
     [SerializeField] private GameObject spawnPoint;
 
     private Animator _animator;
+    private bool playerInArea;
     
     private void Awake()
     {
@@ -17,11 +18,7 @@ public class TotemShoot : MonoBehaviour
     }
 
     
-    IEnumerator Start()
-    {
-        yield return new WaitForSeconds(waitBefore);
-        StartShoot();
-    }
+    
 
     public IEnumerator Shoot()
     {
@@ -29,13 +26,33 @@ public class TotemShoot : MonoBehaviour
         Instantiate(projectilePrefab, spawnPoint.transform.position, transform.rotation);
         _animator.SetBool("Shoot", false);
         yield return new WaitForSeconds(cooldown);
-        StartShoot();
-        
-        
+        if (playerInArea)
+            _animator.SetBool("Shoot", true);
+
+
+
     }
 
-    public void StartShoot()
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player"))
+        {
+            playerInArea = true;
+            StartCoroutine(TriggerShoot());
+        }
+    }
+    private IEnumerator TriggerShoot()
+    {
+        yield return new WaitForSeconds(waitBefore);
+        if (playerInArea)
             _animator.SetBool("Shoot", true);
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInArea = false;
+            _animator.SetBool("Shoot", false);
+        }
     }
 }

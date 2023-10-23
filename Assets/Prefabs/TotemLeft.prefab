@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 9133352222122144582}
   - component: {fileID: 1276152807445565262}
   - component: {fileID: 1553911778296750968}
+  - component: {fileID: 6466665264457481887}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +125,51 @@ MonoBehaviour:
   waitBefore: 0
   projectilePrefab: {fileID: 2709161547638632359, guid: 065e32d474fbdb04f8afb220edccc7a2, type: 3}
   spawnPoint: {fileID: 6160224977151097628}
+--- !u!61 &6466665264457481887
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296611769109936258}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.3640947, y: -0.027443409}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9375, y: 1}
+    newSize: {x: 0.9375, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.5713787, y: 2.3564806}
+  m_EdgeRadius: 0
 --- !u!1 &858638211779193369
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +243,7 @@ GameObject:
   - component: {fileID: 4845204518233410655}
   m_Layer: 0
   m_Name: TotemLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 5026241912245671794}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.6013775, y: -2.515926, z: 0.007971785}
+  m_LocalPosition: {x: -26.245634, y: -6.4891, z: 0.007971785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -263,9 +309,10 @@ GameObject:
   - component: {fileID: 1005857549416123793}
   - component: {fileID: 5031728434724299024}
   - component: {fileID: 8856497098424745087}
+  - component: {fileID: 4078699184736782564}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,6 +422,51 @@ MonoBehaviour:
   waitBefore: 3
   projectilePrefab: {fileID: 2709161547638632359, guid: 065e32d474fbdb04f8afb220edccc7a2, type: 3}
   spawnPoint: {fileID: 2268775316322551578}
+--- !u!61 &4078699184736782564
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812794248180079137}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.965742, y: 0.66715693}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.75, y: 1}
+    newSize: {x: 0.75, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.5871735, y: 2.3343139}
+  m_EdgeRadius: 0
 --- !u!1 &8155221128598122568
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,9 +479,10 @@ GameObject:
   - component: {fileID: 7138683332640331057}
   - component: {fileID: 78991532172483220}
   - component: {fileID: 3840352171419728605}
+  - component: {fileID: 4229856326284785201}
   m_Layer: 0
   m_Name: Top
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,3 +592,48 @@ MonoBehaviour:
   waitBefore: 1
   projectilePrefab: {fileID: 2709161547638632359, guid: 065e32d474fbdb04f8afb220edccc7a2, type: 3}
   spawnPoint: {fileID: 858638211779193369}
+--- !u!61 &4229856326284785201
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155221128598122568}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.6047783, y: -0.67824054}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.875, y: 1}
+    newSize: {x: 1.875, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.5727386, y: 2.356481}
+  m_EdgeRadius: 0

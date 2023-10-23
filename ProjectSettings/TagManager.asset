@@ -10,6 +10,7 @@ TagManager:
   - Diamond
   - Key
   - LockedChest
+  - Enemy
   layers:
   - Default
   - TransparentFX

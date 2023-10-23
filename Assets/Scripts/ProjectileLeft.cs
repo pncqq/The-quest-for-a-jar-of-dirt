@@ -26,7 +26,8 @@ public class ProjectileLeft : MonoBehaviour
     {
         if(other.CompareTag("Player"))
             Destroy(other);
-        Destroy(gameObject);
+        if(!other.CompareTag("Enemy"))
+            Destroy(gameObject);
         
     }
     
