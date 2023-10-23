@@ -18,7 +18,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _xInput;
     private float _jumpInput;
     private bool _doubleJump;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
 
 
     private bool isWallSliding;
