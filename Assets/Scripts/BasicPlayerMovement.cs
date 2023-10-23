@@ -18,7 +18,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _xInput;
     private float _jumpInput;
     private bool _doubleJump;
-    public bool isFacingRight = true;
+    public bool isFacingRight;
 
 
     private bool isWallSliding;
@@ -141,6 +141,7 @@ public class BasicPlayerMovement : MonoBehaviour
         //Move
         _rb.velocity = velocity;
 
+        //Jump
         if (!isWallJumping)
         {
             _rb.velocity = new Vector2(_xInput * speed, _rb.velocity.y);

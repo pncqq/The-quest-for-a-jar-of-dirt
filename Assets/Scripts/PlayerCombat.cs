@@ -5,9 +5,7 @@ public class PlayerCombat : MonoBehaviour
 {
     //Fields
     private Animator _animator;
-    private Transform _attackPoint;
-    public Transform attackPointRight;
-    public Transform attackPointLeft;
+    public Transform attackPoint;
     public LayerMask enemyLayers;
 
     [SerializeField] private int attackPower = 30;
@@ -34,15 +32,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-        //Play attack anim
+        //Attack anim
         _animator.SetTrigger(IsAttacking);
-
-        //Check which attack point (left or right)
-        _attackPoint = _basicPlayerMovement.isFacingRight ? attackPointRight : attackPointLeft;
         
         //Detect enemies in range of attack
         var hitEnemies =
-            Physics2D.OverlapCircleAll(_attackPoint.position, attackRange, enemyLayers);
+            Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         //Damage enemies
         foreach (var enemy in hitEnemies)
@@ -53,8 +48,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_attackPoint == null) return;
+        if (attackPoint == null) return;
 
-        Gizmos.DrawWireSphere(_attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
