@@ -8,7 +8,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _animator;
     private SpriteRenderer _sprite;
-    private BoxCollider2D  _boxCollider2D;
+    private BoxCollider2D _boxCollider2D;
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -19,8 +19,8 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _jumpInput;
     private bool _doubleJump;
     private bool isFacingRight = true;
-    
-    
+
+
     private bool isWallSliding;
     private float wallSlidingSpeed = 2;
     private bool isWallJumping;
@@ -30,8 +30,9 @@ public class BasicPlayerMovement : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 8f);
 
-    
+
     [SerializeField] private Transform wallCheck;
+
     //Animator
     private static readonly int YVelocity = Animator.StringToHash("yVelocity");
     private static readonly int IsMoving = Animator.StringToHash("isMoving");
@@ -52,28 +53,30 @@ public class BasicPlayerMovement : MonoBehaviour
         _xInput = Input.GetAxisRaw("Horizontal");
         _jumpInput = Input.GetAxisRaw("Jump");
 
-        
 
         if (IsGrounded() && !Input.GetButton("Jump"))
         {
             _doubleJump = false;
         }
+
         //Jump check
         if (Input.GetButtonDown("Jump"))
         {
-            if (IsGrounded()|| _doubleJump)
+            if (IsGrounded() || _doubleJump)
             {
                 _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 _doubleJump = !_doubleJump;
             }
-            
         }
+
         WallSlide();
         WallJump();
     }
+
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+        return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f,
+            jumpableGround);
     }
 
     private bool IsWalled()
@@ -120,19 +123,15 @@ public class BasicPlayerMovement : MonoBehaviour
                 localScale.x *= -1f;
                 transform.localScale = localScale;
             }
-            
         }
-
     }
-    
+
     private void StopWallJumping()
     {
         isWallJumping = false;
     }
 
 
-  
-    
     private void FixedUpdate()
     {
         //Variables
@@ -141,7 +140,7 @@ public class BasicPlayerMovement : MonoBehaviour
 
         //Move
         _rb.velocity = velocity;
-        
+
         if (!isWallJumping)
         {
             _rb.velocity = new Vector2(_xInput * speed, _rb.velocity.y);
@@ -155,10 +154,10 @@ public class BasicPlayerMovement : MonoBehaviour
     }
 
 
-
     private void Flip()
     {
         //Left-right movement & sprite orientation
+
         if (isFacingRight && _xInput < 0f || !isFacingRight && _xInput > 0f)
         {
             isFacingRight = !isFacingRight;
@@ -176,8 +175,4 @@ public class BasicPlayerMovement : MonoBehaviour
         _animator.SetBool(IsMoving, isMoving);
         _animator.SetBool(IsJumping, !IsGrounded());
     }
-
-
-
-
 }
