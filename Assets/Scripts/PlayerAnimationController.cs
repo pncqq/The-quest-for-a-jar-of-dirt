@@ -1,33 +1,37 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
-    //Animator
-    [SerializeField] private Animator animator;
+    //====================FIELDS===========================/
+    private Animator _animator;
 
-    // [SerializeField] private float attackDelay = 1.25f;
-    [SerializeField] private float attackDelay;
-    [SerializeField] private float airAttackDelay;
-    private string _bpm;
+    private float _attackDelay;
+    private float _airAttackDelay;
     private string _currentAnimation;
     private bool _isAttackPressed;
     private bool _isAttacking;
     private bool _isGrounded;
+
     private double _lockedTill;
+    //=====================================================/
 
     private void Awake()
     {
+        //Initialize
+        _animator = GetComponent<Animator>();
+
         //Get attackDelay state length and attackAir
-        var clips = animator.runtimeAnimatorController.animationClips;
+        var clips = _animator.runtimeAnimatorController.animationClips;
         foreach (var clip in clips)
         {
             switch (clip.name)
             {
                 case "Player_Attack1":
-                    attackDelay = clip.length;
+                    _attackDelay = clip.length;
                     break;
                 case "Player_AirAttack1":
-                    airAttackDelay = clip.length;
+                    _airAttackDelay = clip.length;
                     break;
             }
         }
@@ -46,7 +50,7 @@ public class PlayerAnimationController : MonoBehaviour
         var state = GetState();
 
         if (state == _currentState) return;
-        animator.CrossFade(state, 0, 0);
+        _animator.CrossFade(state, 0, 0);
         _currentState = state;
     }
 
@@ -70,8 +74,8 @@ public class PlayerAnimationController : MonoBehaviour
 
         //Attack 
         return _isGrounded
-            ? LockState(Attack, attackDelay)
-            : LockState(AirAttack, airAttackDelay);
+            ? LockState(Attack, _attackDelay)
+            : LockState(AirAttack, _airAttackDelay);
 
 
         int LockState(int s, float t)
