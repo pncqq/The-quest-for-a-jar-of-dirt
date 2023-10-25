@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 8622867463941882120}
   - component: {fileID: 4792649955508318157}
   - component: {fileID: 5870096247674667400}
+  - component: {fileID: 7438054060263416670}
   m_Layer: 0
   m_Name: PlayerMain
   m_TagString: Player
@@ -285,7 +286,6 @@ MonoBehaviour:
     m_Bits: 64
   speed: 5
   jumpForce: 7.5
-  isFacingRight: 1
   wallCheck: {fileID: 4732182538965751890}
 --- !u!114 &8622867463941882120
 MonoBehaviour:
@@ -333,3 +333,16 @@ MonoBehaviour:
     m_Bits: 128
   attackPower: 30
   attackRange: 0.24
+--- !u!114 &7438054060263416670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611862645566026958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1011d1a2b4053174bacd411fe73ffbfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 9014616785208537437}

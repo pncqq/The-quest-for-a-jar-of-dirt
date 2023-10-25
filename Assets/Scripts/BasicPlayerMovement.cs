@@ -1,24 +1,23 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
 public class BasicPlayerMovement : MonoBehaviour
 {
     //Compontents
     private Rigidbody2D _rb;
-    private Animator _animator;
-    private SpriteRenderer _sprite;
     private BoxCollider2D _boxCollider2D;
-
     [SerializeField] private LayerMask jumpableGround;
 
     //Movement
     [SerializeField] private float speed = 5;
     [SerializeField] private float jumpForce = 5;
-    private float _xInput;
-    private float _jumpInput;
+    public static float XInput;
     private bool _doubleJump;
-    public bool isFacingRight;
+    public static bool IsFacingRight = true;
+    public static Vector2 Velocity;
+    public static bool IsMoving;
+    public static bool IsGroundedVar;
 
 
     private bool isWallSliding;
@@ -33,25 +32,17 @@ public class BasicPlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform wallCheck;
 
-    //Animator
-    private static readonly int YVelocity = Animator.StringToHash("yVelocity");
-    private static readonly int IsMoving = Animator.StringToHash("isMoving");
-    private static readonly int IsJumping = Animator.StringToHash("isJumping");
-
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
         _boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     //Update is called once per frame
     private void Update()
     {
-        _xInput = Input.GetAxisRaw("Horizontal");
-        _jumpInput = Input.GetAxisRaw("Jump");
+        XInput = Input.GetAxisRaw("Horizontal");
 
 
         if (IsGrounded() && !Input.GetButton("Jump"))
@@ -75,8 +66,10 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f,
-            jumpableGround);
+        IsGroundedVar =
+            Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f,
+                jumpableGround);
+        return IsGroundedVar;
     }
 
     private bool IsWalled()
@@ -86,7 +79,7 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void WallSlide()
     {
-        if (IsWalled() && !IsGrounded() && _xInput != 0f)
+        if (IsWalled() && !IsGrounded() && XInput != 0f)
         {
             isWallSliding = true;
             _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
@@ -118,7 +111,7 @@ public class BasicPlayerMovement : MonoBehaviour
 
             if (transform.localScale.x != wallJumpingDirection)
             {
-                isFacingRight = !isFacingRight;
+                IsFacingRight = !IsFacingRight;
                 Vector3 localScale = transform.localScale;
                 localScale.x *= -1f;
                 transform.localScale = localScale;
@@ -135,45 +128,32 @@ public class BasicPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Variables
-        var velocity = new Vector2(_xInput * speed, _rb.velocity.y);
-        var isMoving = velocity.x != 0;
+        Velocity = new Vector2(XInput * speed, _rb.velocity.y);
+        IsMoving = Velocity.x != 0;
 
         //Move
-        _rb.velocity = velocity;
+        _rb.velocity = Velocity;
 
         //Jump
         if (!isWallJumping)
         {
-            _rb.velocity = new Vector2(_xInput * speed, _rb.velocity.y);
+            _rb.velocity = new Vector2(XInput * speed, _rb.velocity.y);
         }
 
         //Flip sprite
         Flip();
-
-        //UpdateAnimation
-        UpdateAnimation(velocity, isMoving);
     }
 
 
     private void Flip()
     {
         //Left-right movement & sprite orientation
-
-        if (isFacingRight && _xInput < 0f || !isFacingRight && _xInput > 0f)
+        if (IsFacingRight && XInput < 0f || !IsFacingRight && XInput > 0f)
         {
-            isFacingRight = !isFacingRight;
+            IsFacingRight = !IsFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
-    }
-
-
-    private void UpdateAnimation(Vector2 velocity, bool isMoving)
-    {
-        //Animator variables
-        _animator.SetFloat(YVelocity, velocity.y);
-        _animator.SetBool(IsMoving, isMoving);
-        _animator.SetBool(IsJumping, !IsGrounded());
     }
 }
