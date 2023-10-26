@@ -40,7 +40,7 @@ public class PlayerDropdownPlatform : MonoBehaviour
 
     private IEnumerator DisableCollision()
     {
-        TilemapCollider2D _platformCollider = _currentPlatform.GetComponent<TilemapCollider2D>();
+        Collider2D _platformCollider = _currentPlatform.GetComponent<Collider2D>();
 
         Physics2D.IgnoreCollision(_player, _platformCollider);
         yield return new WaitForSeconds(0.25f);
