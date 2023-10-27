@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4589319181311841779}
   - component: {fileID: 498255148503673333}
   - component: {fileID: 6184170254931448912}
+  - component: {fileID: -8492428737325276648}
   m_Layer: 6
   m_Name: 1x3 Dropdown
   m_TagString: DropdownPlatform
@@ -178,3 +179,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8492428737325276648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574091936741635724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc1b27a75261c040a300deed9e76c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 498005984358855852, guid: 2aead48d068a4fb4ab2a6dcd93f64496, type: 3}
