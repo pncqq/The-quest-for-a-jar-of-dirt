@@ -1,32 +1,39 @@
-using System.Collections;
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerCombat : MonoBehaviour
 {
     //Fields
     public Transform attackPoint;
+    public Transform attackPointJumping;
     public LayerMask enemyLayers;
+    public PlayerAnimationController playerAnimController;
+    private double _lastAttackedAt;
     [SerializeField] private int attackPower = 30;
     [SerializeField] private float attackRange = 0.5f;
-
-    //Animator fields
-    private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
 
 
     private void Update()
     {
-        //TODO: Attack if has sword in hand and 'F' is pressed
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Attack();
-        }
+        if (!Input.GetKeyDown(KeyCode.F) || !playerAnimController.IsSworded) return;
+
+        if (Time.time <= _lastAttackedAt + playerAnimController.AttackDelay) return;
+
+        Attack();
+        _lastAttackedAt = Time.time;
     }
 
     private void Attack()
     {
-        //Detect enemies in range of attack
-        var hitEnemies =
-            Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies;
+
+        //Detect enemies in range of attack. Hitbox z boku albo z dolu
+        hitEnemies =
+            Physics2D.OverlapCircleAll(
+                !BasicPlayerMovement.IsGroundedVar ? attackPointJumping.position : attackPoint.position, attackRange,
+                enemyLayers);
+
 
         //Damage enemies
         foreach (var enemy in hitEnemies)
