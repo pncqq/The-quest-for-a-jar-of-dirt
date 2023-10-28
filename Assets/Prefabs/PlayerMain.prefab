@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 3457922334244478717}
   - component: {fileID: 9014616785208537437}
   - component: {fileID: 671540432905271761}
-  - component: {fileID: 8622867463941882120}
   - component: {fileID: 4792649955508318157}
   - component: {fileID: 5870096247674667400}
   - component: {fileID: 7438054060263416670}
@@ -288,19 +287,6 @@ MonoBehaviour:
   speed: 5
   jumpForce: 7.5
   wallCheck: {fileID: 4732182538965751890}
---- !u!114 &8622867463941882120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6611862645566026958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da0c864c092f05488c7b36446e89425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 498005984358855852}
 --- !u!114 &4792649955508318157
 MonoBehaviour:
   m_ObjectHideFlags: 0
