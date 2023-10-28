@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DropdownPlatform
+  - GoldCoin
+  - SilverCoin
+  - Diamond
+  - Key
+  - LockedChest
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Enemies
   - 
   - 
   - 
@@ -38,6 +45,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2710593455
+    locked: 0
+  - name: Terrian
+    uniqueID: 1294831185
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI_1
+    uniqueID: 2839055847
+    locked: 0
+  - name: UI_2
+    uniqueID: 679539737
     locked: 0
