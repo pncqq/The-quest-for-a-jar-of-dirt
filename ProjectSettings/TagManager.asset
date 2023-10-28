@@ -11,6 +11,8 @@ TagManager:
   - Key
   - LockedChest
   - Enemy
+  - Sword
+  - CollapsingPlatform
   layers:
   - Default
   - TransparentFX
