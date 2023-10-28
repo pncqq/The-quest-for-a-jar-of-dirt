@@ -102,6 +102,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 62755763845060439}
+  - {fileID: 1105156379295470668}
   - {fileID: 4732182538965751890}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -328,9 +329,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 62755763845060439}
+  attackPointJumping: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  playerAnimController: {fileID: 0}
   attackPower: 30
   attackRange: 0.24
 --- !u!114 &7438054060263416670
@@ -345,4 +348,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1011d1a2b4053174bacd411fe73ffbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 9014616785208537437}
+--- !u!1 &6805361773078855959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1105156379295470668}
+  m_Layer: 0
+  m_Name: AttackPointJumping
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1105156379295470668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6805361773078855959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: -0.512, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7721582525691785473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

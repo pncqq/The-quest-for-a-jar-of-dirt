@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     //Fields
     public Transform attackPoint;
+    public Transform attackPointJumping;
     public LayerMask enemyLayers;
     public PlayerAnimationController playerAnimController;
     private double _lastAttackedAt;
@@ -25,9 +26,14 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
+        Collider2D[] hitEnemies;
+
         //Detect enemies in range of attack
-        var hitEnemies =
-            Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        hitEnemies =
+            Physics2D.OverlapCircleAll(
+                !BasicPlayerMovement.IsGroundedVar ? attackPointJumping.position : attackPoint.position, attackRange,
+                enemyLayers);
+
 
         //Damage enemies
         foreach (var enemy in hitEnemies)
