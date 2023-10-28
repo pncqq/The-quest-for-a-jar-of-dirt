@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
     {
         Collider2D[] hitEnemies;
 
-        //Detect enemies in range of attack
+        //Detect enemies in range of attack. Hitbox z boku albo z dolu
         hitEnemies =
             Physics2D.OverlapCircleAll(
                 !BasicPlayerMovement.IsGroundedVar ? attackPointJumping.position : attackPoint.position, attackRange,
