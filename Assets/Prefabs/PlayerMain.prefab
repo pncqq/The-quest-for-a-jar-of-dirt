@@ -302,6 +302,8 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 0}
+  _playerRB: {fileID: 201898706310627436}
+  _playerMovement: {fileID: 671540432905271761}
 --- !u!114 &5870096247674667400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +321,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
-  playerAnimController: {fileID: 0}
+  playerAnimController: {fileID: 7438054060263416670}
   attackPower: 30
   attackRange: 0.24
 --- !u!114 &7438054060263416670
