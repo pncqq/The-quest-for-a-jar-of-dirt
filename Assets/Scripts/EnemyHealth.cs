@@ -4,9 +4,11 @@ public class EnemyHealth : MonoBehaviour
 {
     //Fields
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private Rigidbody2D _playerRB;
     private Animator _animator;
     private int _currentHealth;
     private Collider2D _collider2D;
+    private Rigidbody2D _rb;
 
     //Animator fields
     private static readonly int IsHurt = Animator.StringToHash("isHurt");
@@ -16,6 +18,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _collider2D = GetComponent<Collider2D>();
         _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -28,6 +31,10 @@ public class EnemyHealth : MonoBehaviour
     {
         _currentHealth -= damage;
         _animator.SetTrigger(IsHurt);
+        Vector2 direction = new Vector2(150*(transform.position.x - _playerRB.transform.position.x), 75f);
+        
+        _rb.AddForce(direction);
+        
 
         //If enemy dies
         if (_currentHealth <= 0)
@@ -41,7 +48,7 @@ public class EnemyHealth : MonoBehaviour
     {
         //Die animation
         _animator.SetBool(IsDead, true);
-
+        _rb.AddForce(new Vector2(transform.position.x, 100f));
         //Disable enemy
         _collider2D.enabled = false;
         enabled = false;
