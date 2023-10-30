@@ -50,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 2710593455
     locked: 0
+  - name: Enemy
+    uniqueID: 854631581
+    locked: 0
   - name: Terrian
     uniqueID: 1294831185
     locked: 0
