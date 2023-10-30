@@ -172,3 +172,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+  _playerHealth: {fileID: 4792649955508318157, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}

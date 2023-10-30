@@ -12,7 +12,8 @@ public class PlayerAnimationController : MonoBehaviour
     private bool _isAttacking;
     private bool _isGrounded;
     internal bool IsSworded;
-
+    private bool _isDead;
+    
     private double _lockedTill;
     //=====================================================/
 
@@ -39,6 +40,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Update()
     {
+        //Check if dead
+        if (HealthSystem.instance.currentHealth <= 0)
+            _isDead = true;
+        
         //Check if attack key pressed
         if (Input.GetKeyDown(KeyCode.F) && IsSworded)
             _isAttacking = true;
@@ -58,6 +63,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private int GetState()
     {
+        if (_isDead) return DeadHit;
         //If animation still playing
         if (Time.time < _lockedTill) return _currentState;
 
@@ -122,6 +128,7 @@ public class PlayerAnimationController : MonoBehaviour
     private static readonly int JumpSword = Animator.StringToHash("Player_JumpSword");
     private static readonly int FallSword = Animator.StringToHash("Player_FallSword");
     private static readonly int GroundSword = Animator.StringToHash("Player_GroundSword");
+    private static readonly int DeadHit = Animator.StringToHash("Player_Dead_Hit");
 
     #endregion
 }
