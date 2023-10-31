@@ -37,7 +37,7 @@ public class CollectCollectible : MonoBehaviour
         }
     }
 
-    public void DestroyMe()
+    private void DestroyMe()
     {
         Destroy(gameObject);
     }

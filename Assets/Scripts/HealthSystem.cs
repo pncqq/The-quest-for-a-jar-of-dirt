@@ -8,14 +8,12 @@ public class HealthSystem : MonoBehaviour
     public int currentHealth;
     public HealthBar healthBar;
     [SerializeField] Rigidbody2D _playerRB;
-    private GameObject _player;
     [SerializeField] private BasicPlayerMovement _playerMovement;
 
 
     private void Awake()
     {
         instance = this;
-        _player = GetComponent<GameObject>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         
@@ -25,10 +23,8 @@ public class HealthSystem : MonoBehaviour
     {
         //Nie zmniejszaj poniżej 0
         if (currentHealth < 0) currentHealth = 0;
-        if (currentHealth <= 0)
-        {
-            Destroy(_playerMovement);
-        }
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        if (currentHealth <= 0) Destroy(_playerMovement);
     }
 
     
@@ -44,6 +40,11 @@ public class HealthSystem : MonoBehaviour
             _playerRB.velocity = new Vector2(1f, 5f);
         }
         
+        healthBar.SetHealth(currentHealth);
+    }
+    public void Heal(int healSize)
+    {
+        currentHealth += healSize;
         healthBar.SetHealth(currentHealth);
     }
 }
