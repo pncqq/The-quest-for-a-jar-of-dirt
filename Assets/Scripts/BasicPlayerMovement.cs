@@ -45,17 +45,13 @@ public class BasicPlayerMovement : MonoBehaviour
         XInput = Input.GetAxisRaw("Horizontal");
 
 
-        if (IsGrounded() && !_isJumping)
-        {
-            _doubleJump = doubleJump;
-        }
+     
 
         if (Input.GetButtonDown("Jump"))
         {
-            _lastPressedJumpTime = 0.1f;
+            _lastPressedJumpTime = 0.3f;
             if (CanJump() && _lastPressedJumpTime > 0)
             {
-                Debug.Log("Skacze");
                 _isJumping = true;
                 Jump();
             } else if (_lastPressedJumpTime > 0 && _doubleJump > 0)
@@ -63,7 +59,6 @@ public class BasicPlayerMovement : MonoBehaviour
                 _isJumping = true;
                 _doubleJump--;
                 Jump();
-                //  Debug.Log("Skacze znowu");
             }
         }
 
@@ -72,6 +67,7 @@ public class BasicPlayerMovement : MonoBehaviour
             if (IsGrounded())
             {
                 _lastOnGroundTime = _coyoteTime;
+                _doubleJump = doubleJump;
             }
         }
 
@@ -91,7 +87,6 @@ public class BasicPlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Run();
-        //Flip sprite
         Flip();
     }
 
@@ -103,10 +98,17 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        _lastPressedJumpTime = 0;
+        _lastOnGroundTime = 0;
         var force = this.jumpForce;
         if (_rb.velocity.y < 0) // jeśli postać już spada wzmocniony będzie skok
         {
             force -= _rb.velocity.y;
+        }
+
+        if (_rb.velocity.y > 0)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f); // unikniecie wysokiego wyskoku podczas 2 x spacja
         }
         _rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         
