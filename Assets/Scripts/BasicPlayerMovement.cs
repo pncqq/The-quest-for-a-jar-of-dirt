@@ -1,3 +1,5 @@
+using System.Net.Http.Headers;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,6 +13,9 @@ public class BasicPlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private BoxCollider2D _boxCollider2D;
     [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private Transform frontWallCheckPoint;
+    [SerializeField] private Transform backWallCheckPoint;
+    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.5f, 1f);
 
     //Movement
     [SerializeField] private float speed = 5;
@@ -20,15 +25,24 @@ public class BasicPlayerMovement : MonoBehaviour
     
     //Jump
     [SerializeField] private int doubleJump = 1;
-    private bool _canJump = true;
-    private float _coyoteTime = 0.3f;
+    private const float CoyoteTime = 0.3f;
     private int _doubleJump;
+    
+    //Wall jump
+    private const float WallJumpTime = 0.3f;
+    private bool _isWallJumping;
+    private float _wallJumpStartTime;
+    private Vector2 WallJumpForce = new Vector2(7.5f, 7.5f);
+    
     
     //Timers
     private float _lastPressedJumpTime;
     private float _lastOnGroundTime;
     private bool _isJumping;
-    
+    private float _lastOnWallRightTime;
+    private float _lastOnWallLeftTime;
+    private float _lastOnWallTime;
+    private int _lastWallJumpDir;
 
 
     private void Awake()
@@ -42,10 +56,13 @@ public class BasicPlayerMovement : MonoBehaviour
     {
         _lastOnGroundTime -= Time.deltaTime;
         _lastPressedJumpTime -= Time.deltaTime;
+        _lastOnWallLeftTime -= Time.deltaTime;
+        _lastOnWallRightTime -= Time.deltaTime;
+        _lastOnWallTime -= Time.deltaTime;
         XInput = Input.GetAxisRaw("Horizontal");
 
 
-     
+
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -54,21 +71,59 @@ public class BasicPlayerMovement : MonoBehaviour
             {
                 _isJumping = true;
                 Jump();
-            } else if (_lastPressedJumpTime > 0 && _doubleJump > 0)
+            }
+            else if (_lastPressedJumpTime > 0 && _doubleJump > 0)
             {
                 _isJumping = true;
                 _doubleJump--;
                 Jump();
             }
+            else if (CanWallJump() && _lastPressedJumpTime > 0)
+            {
+                _isWallJumping = true;
+                _isJumping = false;
+                _wallJumpStartTime = Time.time;
+                _lastWallJumpDir = (_lastOnWallRightTime > 0) ? -1 : 1;
+                WallJump(_lastWallJumpDir);
+            }
+
         }
 
         if (!_isJumping)
         {
             if (IsGrounded())
             {
-                _lastOnGroundTime = _coyoteTime;
+                _lastOnGroundTime = CoyoteTime;
                 _doubleJump = doubleJump;
             }
+
+            //Right Wall Check
+            if (((Physics2D.OverlapBox(frontWallCheckPoint.position, wallCheckSize, 0, jumpableGround) &&
+                  _isFacingRight)
+                 || (Physics2D.OverlapBox(backWallCheckPoint.position, wallCheckSize, 0, jumpableGround) &&
+                     !_isFacingRight)) && !_isWallJumping)
+            {
+                _lastOnWallRightTime = CoyoteTime;
+                Debug.Log("Right");
+            }
+
+
+            //Left Wall Check
+            if (((Physics2D.OverlapBox(frontWallCheckPoint.position, wallCheckSize, 0, jumpableGround) &&
+                  !_isFacingRight)
+                 || (Physics2D.OverlapBox(backWallCheckPoint.position, wallCheckSize, 0, jumpableGround) &&
+                     _isFacingRight)) && !_isWallJumping)
+            {
+                _lastOnWallLeftTime = CoyoteTime;
+                Debug.Log("left");
+            }
+
+       
+
+            //Two checks needed for both left and right walls since whenever the play turns the wall checkPoints swap sides
+            _lastOnWallTime = Mathf.Max(_lastOnWallLeftTime, _lastOnWallRightTime);
+           
+
         }
 
 
@@ -77,12 +132,46 @@ public class BasicPlayerMovement : MonoBehaviour
             _isJumping = false;
         }
 
+        if (_isWallJumping && Time.time - _wallJumpStartTime > WallJumpTime )
+        {
+            _isWallJumping = false;
+        }
+
        
         
         
     }
-    
 
+    private bool CanWallJump()
+    {
+        return _lastPressedJumpTime > 0 && _lastOnWallTime > 0 && _lastOnGroundTime <= 0 && (!_isWallJumping ||
+            (_lastOnWallRightTime > 0 && _lastWallJumpDir == 1) || (_lastOnWallLeftTime > 0 && _lastWallJumpDir == -1));
+    }
+
+    private void WallJump(int dir)
+    {
+        //Ensures we can't call Wall Jump multiple times from one press
+        _lastPressedJumpTime = 0;
+        _lastOnGroundTime = 0;
+        _lastOnWallRightTime = 0;
+        _lastOnWallLeftTime = 0;
+
+
+        Vector2 force = new Vector2(WallJumpForce.x, WallJumpForce.y);
+        force.x *= dir; //apply force in opposite direction of wall
+
+        if (Mathf.Sign(_rb.velocity.x) != Mathf.Sign(force.x))
+            force.x -= _rb.velocity.x;
+
+        if (_rb.velocity.y <
+            0) //checks whether player is falling, if so we subtract the velocity.y (counteracting force of gravity). This ensures the player always reaches our desired jump force or greater
+            force.y -= _rb.velocity.y;
+
+        //Unlike in the run we want to use the Impulse mode.
+        //The default mode will apply are force instantly ignoring masss
+        _rb.AddForce(force, ForceMode2D.Impulse);
+
+    }
 
     private void FixedUpdate()
     {
@@ -121,6 +210,8 @@ public class BasicPlayerMovement : MonoBehaviour
                 jumpableGround);
         return IsGroundedVar;
     }
+    
+   
     
     private bool CanJump()
     {
