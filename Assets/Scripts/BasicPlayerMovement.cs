@@ -19,13 +19,16 @@ public class BasicPlayerMovement : MonoBehaviour
     private static bool _isFacingRight = true;
     
     //Jump
+    [SerializeField] private int doubleJump = 1;
     private bool _canJump = true;
     private float _coyoteTime = 0.3f;
+    private int _doubleJump;
     
     //Timers
     private float _lastPressedJumpTime;
     private float _lastOnGroundTime;
     private bool _isJumping;
+    
 
 
     private void Awake()
@@ -41,9 +44,27 @@ public class BasicPlayerMovement : MonoBehaviour
         _lastPressedJumpTime -= Time.deltaTime;
         XInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && CanJump())
+
+        if (IsGrounded() && !_isJumping)
+        {
+            _doubleJump = doubleJump;
+        }
+
+        if (Input.GetButtonDown("Jump"))
         {
             _lastPressedJumpTime = 0.1f;
+            if (CanJump() && _lastPressedJumpTime > 0)
+            {
+                Debug.Log("Skacze");
+                _isJumping = true;
+                Jump();
+            } else if (_lastPressedJumpTime > 0 && _doubleJump > 0)
+            {
+                _isJumping = true;
+                _doubleJump--;
+                Jump();
+                //  Debug.Log("Skacze znowu");
+            }
         }
 
         if (!_isJumping)
@@ -60,11 +81,8 @@ public class BasicPlayerMovement : MonoBehaviour
             _isJumping = false;
         }
 
-        if (CanJump() && _lastPressedJumpTime > 0)
-        {
-            _isJumping = true;
-            Jump();
-        }
+       
+        
         
     }
     
