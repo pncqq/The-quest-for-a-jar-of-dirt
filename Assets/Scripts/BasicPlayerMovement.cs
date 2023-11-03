@@ -1,5 +1,4 @@
 using System.Net.Http.Headers;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -15,7 +14,7 @@ public class BasicPlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private Transform frontWallCheckPoint;
     [SerializeField] private Transform backWallCheckPoint;
-    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.5f, 1f);
+    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.1f, 0.5f);
 
     //Movement
     [SerializeField] private float speed = 5;
@@ -24,11 +23,14 @@ public class BasicPlayerMovement : MonoBehaviour
     private static bool _isFacingRight = true;
     
     //Jump
+    public float jumpHangAccelerationMult = 0.5f; 
+    public float jumpHangMaxSpeedMult = 0.5f; 
     [SerializeField] private int doubleJump = 1;
     private const float CoyoteTime = 0.3f;
     private int _doubleJump;
     
     //Wall jump
+    [SerializeField] private float wallSlideSpeed = 2f;
     private const float WallJumpTime = 0.3f;
     private bool _isWallJumping;
     private float _wallJumpStartTime;
@@ -104,7 +106,7 @@ public class BasicPlayerMovement : MonoBehaviour
                      !_isFacingRight)) && !_isWallJumping)
             {
                 _lastOnWallRightTime = CoyoteTime;
-                Debug.Log("Right");
+              
             }
 
 
@@ -115,7 +117,7 @@ public class BasicPlayerMovement : MonoBehaviour
                      _isFacingRight)) && !_isWallJumping)
             {
                 _lastOnWallLeftTime = CoyoteTime;
-                Debug.Log("left");
+              
             }
 
        
@@ -155,20 +157,24 @@ public class BasicPlayerMovement : MonoBehaviour
         _lastOnGroundTime = 0;
         _lastOnWallRightTime = 0;
         _lastOnWallLeftTime = 0;
-
+       
 
         Vector2 force = new Vector2(WallJumpForce.x, WallJumpForce.y);
         force.x *= dir; //apply force in opposite direction of wall
 
         if (Mathf.Sign(_rb.velocity.x) != Mathf.Sign(force.x))
+        {
             force.x -= _rb.velocity.x;
+            Debug.Log("Hejka");
+        }
+            
 
-        if (_rb.velocity.y <
-            0) //checks whether player is falling, if so we subtract the velocity.y (counteracting force of gravity). This ensures the player always reaches our desired jump force or greater
+        if (_rb.velocity.y < 0)
+        {
             force.y -= _rb.velocity.y;
-
-        //Unlike in the run we want to use the Impulse mode.
-        //The default mode will apply are force instantly ignoring masss
+        }
+            
+        
         _rb.AddForce(force, ForceMode2D.Impulse);
 
     }
@@ -182,7 +188,14 @@ public class BasicPlayerMovement : MonoBehaviour
     private void Run()
     {
         var runDistance = XInput * speed;
+        Debug.Log(_lastOnWallTime);;
+        if (_lastOnWallTime > 0 && !_isJumping)
+        {
+            runDistance = 0; // Zatrzymaj postać w miejscu wzdłuż ściany
+            _rb.velocity = new Vector2(_rb.velocity.x, -wallSlideSpeed);
+        }
         _rb.velocity = new Vector2(runDistance, _rb.velocity.y);
+     
     }
 
     private void Jump()
