@@ -16,13 +16,19 @@ public class Dialogue : MonoBehaviour
  private int _charIndex;
  private bool _started;
  private bool _waitForNext;
- 
- private void ToggleWindow(bool show)
+
+ private void Awake()
+ {
+     ToggleWindow(false);
+     ToggleIndicator(false);
+ }
+
+ public void ToggleWindow(bool show)
  {
      window.SetActive(show);
  }
  
- private void ToggleIndicator(bool show)
+ public void ToggleIndicator(bool show)
  {
      indicator.SetActive(show);
  }
