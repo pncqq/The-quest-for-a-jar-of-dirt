@@ -14,7 +14,7 @@ public class BasicPlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private Transform frontWallCheckPoint;
     [SerializeField] private Transform backWallCheckPoint;
-    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.1f, 0.5f);
+    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.01f, 0.5f);
 
     //Movement
     [SerializeField] private float speed = 5;
@@ -34,7 +34,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private const float WallJumpTime = 0.3f;
     private bool _isWallJumping;
     private float _wallJumpStartTime;
-    private Vector2 WallJumpForce = new Vector2(7.5f, 7.5f);
+    private Vector2 WallJumpForce = new Vector2(3f, 3f);
     
     
     //Timers
@@ -175,7 +175,7 @@ public class BasicPlayerMovement : MonoBehaviour
         }
             
         
-        _rb.AddForce(force, ForceMode2D.Impulse);
+        _rb.AddForce((force), ForceMode2D.Impulse);
 
     }
 
@@ -188,13 +188,17 @@ public class BasicPlayerMovement : MonoBehaviour
     private void Run()
     {
         var runDistance = XInput * speed;
-        Debug.Log(_lastOnWallTime);;
+        Debug.Log(_lastOnWallTime);
+        if (IsGrounded())
+        {
+            _rb.velocity = new Vector2(runDistance, _rb.velocity.y);
+        }
         if (_lastOnWallTime > 0 && !_isJumping)
         {
             runDistance = 0; // Zatrzymaj postać w miejscu wzdłuż ściany
             _rb.velocity = new Vector2(_rb.velocity.x, -wallSlideSpeed);
         }
-        _rb.velocity = new Vector2(runDistance, _rb.velocity.y);
+        
      
     }
 
@@ -212,7 +216,7 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, 0f); // unikniecie wysokiego wyskoku podczas 2 x spacja
         }
-        _rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        _rb.AddForce(Vector2.up * (force), ForceMode2D.Impulse);
         
     }
     private bool IsGrounded() //ground check
