@@ -10,7 +10,7 @@ public class Dialogue : MonoBehaviour
  public GameObject indicator;
  public List<string> dialogues;
  public TMP_Text dialogueText;
- public float writingSpeed;
+ public float writingSpeed = 0.05f;
 
  private int _index;
  private int _charIndex;
@@ -57,12 +57,16 @@ public class Dialogue : MonoBehaviour
  //End dialogue
  public void EndDialogue()
  {
+     _started = false;
+     _waitForNext = false;
+     StopAllCoroutines();
    ToggleWindow(false);
    
  }
  //logic
  IEnumerator Writing()
  {
+     yield return new WaitForSeconds(writingSpeed);
      string currentDialogue = dialogues[_index];
      dialogueText.text += currentDialogue[_charIndex];
      _charIndex++;
@@ -80,7 +84,7 @@ public class Dialogue : MonoBehaviour
 
  private void Update()
  {
-     if (_started)
+     if (!_started)
      {
          return;
      }
@@ -96,6 +100,7 @@ public class Dialogue : MonoBehaviour
          }
          else
          {
+             ToggleIndicator(true);
              EndDialogue();
          }
      }
