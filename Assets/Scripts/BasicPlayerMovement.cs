@@ -143,17 +143,17 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             //Knock-back
             if (knockbackRight)
-                _rb.velocity = new Vector2(-knockbackForce, knockbackForce);
+                _rb.velocity = new Vector2(-knockbackForce*2, knockbackForce/2);
             else
-                _rb.velocity = new Vector2(knockbackForce, knockbackForce);
+                _rb.velocity = new Vector2(knockbackForce*2, knockbackForce/2);
             knockbackTimer -= Time.deltaTime;
         }
 
         //Jump
-        if (!isWallJumping)
+        /*if (!isWallJumping)
         {
             _rb.velocity = new Vector2(XInput * speed, _rb.velocity.y);
-        }
+        }*/
 
         //Flip sprite
         Flip();

@@ -3880,17 +3880,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 71917532}
     m_Modifications:
-    - target: {fileID: 671540432905271761, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
-      propertyPath: knockbackForce
+    - target: {fileID: 201898706310627436, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+      propertyPath: m_GravityScale
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 671540432905271761, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
-      propertyPath: knockbackTimer
-      value: 0
+      propertyPath: knockbackForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 671540432905271761, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
       propertyPath: knockbackTotal
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4792649955508318157, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
       propertyPath: healthBar

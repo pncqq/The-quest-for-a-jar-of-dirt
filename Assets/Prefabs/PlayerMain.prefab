@@ -287,9 +287,9 @@ MonoBehaviour:
   speed: 5
   jumpForce: 7.5
   wallCheck: {fileID: 4732182538965751890}
-  knockbackForce: 2
+  knockbackForce: 6
   knockbackTimer: 0
-  knockbackTotal: 0.3
+  knockbackTotal: 1
   knockbackRight: 0
 --- !u!114 &4792649955508318157
 MonoBehaviour:
