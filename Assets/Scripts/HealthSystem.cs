@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ public class HealthSystem : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
-    [SerializeField] Rigidbody2D _playerRB;
+    
+    
     [SerializeField] private BasicPlayerMovement _playerMovement;
 
 
@@ -27,19 +29,11 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0) Destroy(_playerMovement);
     }
 
-    
-    public void TakeDamage(int damage, Rigidbody2D enemy)
+
+
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (enemy.transform.position.x > transform.position.x)
-        {
-            _playerRB.velocity = new Vector2(-1f, 5f);
-        }
-        else
-        {
-            _playerRB.velocity = new Vector2(1f, 5f);
-        }
-        
         healthBar.SetHealth(currentHealth);
     }
     public void Heal(int healSize)

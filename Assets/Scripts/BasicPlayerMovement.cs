@@ -33,6 +33,11 @@ public class BasicPlayerMovement : MonoBehaviour
     [SerializeField] private Transform wallCheck;
 
 
+    
+    public float knockbackForce;
+    public float knockbackTimer;
+    public float knockbackTotal;
+    public bool knockbackRight;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -132,7 +137,17 @@ public class BasicPlayerMovement : MonoBehaviour
         IsMoving = Velocity.x != 0;
 
         //Move
-        _rb.velocity = Velocity;
+        if(knockbackTimer <= 0)
+            _rb.velocity = Velocity;
+        else
+        {
+            //Knock-back
+            if (knockbackRight)
+                _rb.velocity = new Vector2(-knockbackForce, knockbackForce);
+            else
+                _rb.velocity = new Vector2(knockbackForce, knockbackForce);
+            knockbackTimer -= Time.deltaTime;
+        }
 
         //Jump
         if (!isWallJumping)
