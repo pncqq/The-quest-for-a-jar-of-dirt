@@ -287,9 +287,9 @@ MonoBehaviour:
   speed: 5
   jumpForce: 7.5
   wallCheck: {fileID: 4732182538965751890}
-  knockbackForce: 6
+  knockbackForce: 5
   knockbackTimer: 0
-  knockbackTotal: 1
+  knockbackTotal: 0.1
   knockbackRight: 0
 --- !u!114 &4792649955508318157
 MonoBehaviour:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 62755763845060439}
-  attackPointJumping: {fileID: 0}
+  attackPointJumping: {fileID: 1105156379295470668}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128

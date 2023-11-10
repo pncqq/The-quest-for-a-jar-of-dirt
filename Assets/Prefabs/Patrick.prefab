@@ -172,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 854631581
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: abba682cbcd8ae247be1d7b7fd3e2fbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -297,7 +297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  _playerRB: {fileID: 0}
+  _playerRB: {fileID: 201898706310627436, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+  patrol: {fileID: 7072181175079472362}
 --- !u!1001 &8195854174210796106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -349,6 +350,14 @@ PrefabInstance:
     - target: {fileID: 1391340514577146671, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466690561623824247, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466690561623824247, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 854631581
       objectReference: {fileID: 0}
     - target: {fileID: 4121956439684831319, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
       propertyPath: m_Name
