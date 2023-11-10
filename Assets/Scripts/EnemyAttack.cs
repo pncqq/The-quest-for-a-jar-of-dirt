@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             playerMovement.knockbackTimer = playerMovement.knockbackTotal;
             if (other.transform.position.x <= transform.position.x)

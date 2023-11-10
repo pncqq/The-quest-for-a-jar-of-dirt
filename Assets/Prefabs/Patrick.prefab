@@ -96,6 +96,98 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2397638446195678644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8291739040140852819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7958346340159323646}
+  - component: {fileID: 3327165290950275908}
+  - component: {fileID: 6900941839727084033}
+  m_Layer: 7
+  m_Name: EnemyAwareness
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7958346340159323646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291739040140852819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4013035766851648571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3327165290950275908
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291739040140852819}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.1607323, y: 0.021544933}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2873077, y: 0.95691013}
+  m_EdgeRadius: 0
+--- !u!114 &6900941839727084033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291739040140852819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76a298a211efe34cba14cdd9dd4dfe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7072181175079472362}
+  speedIncrease: 3
 --- !u!1 &8369355479031037134
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,10 +220,11 @@ Transform:
   m_GameObject: {fileID: 8369355479031037134}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1939697, y: -0.28316736, z: -0.057501208}
+  m_LocalPosition: {x: 2.1939697, y: -0.299, z: -0.057501208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7958346340159323646}
   m_Father: {fileID: 2397638446195678644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4700699576658039545
@@ -297,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  _playerRB: {fileID: 201898706310627436, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+  _playerRB: {fileID: 0}
   patrol: {fileID: 7072181175079472362}
 --- !u!1001 &8195854174210796106
 PrefabInstance:
@@ -381,7 +474,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1391340514577146671, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7958346340159323646}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4121956439684831319, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
       insertIndex: -1
@@ -400,4 +496,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
-  playerMovement: {fileID: 671540432905271761, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+  playerMovement: {fileID: 0}

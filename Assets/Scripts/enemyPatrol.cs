@@ -14,7 +14,7 @@ public class enemyPatrol : MonoBehaviour
     private Transform _currPoint;
     private bool isIdle;
 
-    [SerializeField] private float speed;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
