@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public static HealthSystem instance;
+    public static HealthSystem Instance;
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
@@ -13,10 +13,9 @@ public class HealthSystem : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        
     }
 
     private void Update()
@@ -27,21 +26,17 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0) Destroy(_playerMovement);
     }
 
-    
+
     public void TakeDamage(int damage, Rigidbody2D enemy)
     {
         currentHealth -= damage;
-        if (enemy.transform.position.x > transform.position.x)
-        {
-            _playerRB.velocity = new Vector2(-1f, 5f);
-        }
-        else
-        {
-            _playerRB.velocity = new Vector2(1f, 5f);
-        }
-        
+        _playerRB.velocity = enemy.transform.position.x > transform.position.x
+            ? new Vector2(-1f, 5f)
+            : new Vector2(1f, 5f);
+
         healthBar.SetHealth(currentHealth);
     }
+
     public void Heal(int healSize)
     {
         currentHealth += healSize;

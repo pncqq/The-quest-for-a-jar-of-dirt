@@ -20,7 +20,7 @@ public class HealthPotion : MonoBehaviour
 
     private void Use()
     {
-        HealthSystem.instance.Heal(50);
+        HealthSystem.Instance.Heal(50);
         _animator.SetBool("IsUsed", true);
     }
     private void DestroyMe()

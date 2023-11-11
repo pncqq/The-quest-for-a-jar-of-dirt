@@ -41,7 +41,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         //Check if dead
-        if (HealthSystem.instance.currentHealth <= 0)
+        if (HealthSystem.Instance.currentHealth <= 0)
             _isDead = true;
         
         //Check if attack key pressed
