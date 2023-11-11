@@ -5,8 +5,8 @@ public class CollectibleCounter : MonoBehaviour
 {
     public static CollectibleCounter instance;
     public int gCoinCount;
-    [SerializeField] private int sCoinCount;
-    [SerializeField] private int dCount;
+    public int sCoinCount;
+    public int dCount;
     public int kCount;
     [SerializeField] private TMP_Text coinText;
 
