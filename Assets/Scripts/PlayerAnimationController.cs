@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
@@ -100,8 +102,8 @@ public class PlayerAnimationController : MonoBehaviour
                 : LockState(Hit, _hitDelay);
         }
 
-
         //Movement animations
+
         if (!IsSworded)
             return _isGrounded switch
             {
