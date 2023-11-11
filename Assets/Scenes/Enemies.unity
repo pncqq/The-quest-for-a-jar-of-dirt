@@ -3554,6 +3554,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &459507866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6611862645566026958, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+  m_PrefabInstance: {fileID: 676597395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &479584813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,7 +3948,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6611862645566026958, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1676363129}
   m_SourcePrefab: {fileID: 100100000, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
 --- !u!1 &688261992
 GameObject:
@@ -4283,7 +4291,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7438054060263416670, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
   m_PrefabInstance: {fileID: 676597395}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 459507866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1011d1a2b4053174bacd411fe73ffbfb, type: 3}
@@ -4299,10 +4307,22 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 671540432905271761, guid: 4d4b290045c916247bfd2a3e484a4468, type: 3}
   m_PrefabInstance: {fileID: 676597395}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 459507866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd258f1065cec5345996df82b083c891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1676363129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459507866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6d5c30516051845ad114a3a3971d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1678363354
@@ -25799,10 +25819,6 @@ PrefabInstance:
     - target: {fileID: 3723702977400830985, guid: 5ce33087280058a438a5bc0c672a63a8, type: 3}
       propertyPath: m_Name
       value: Patrick
-      objectReference: {fileID: 0}
-    - target: {fileID: 4013035766851648571, guid: 5ce33087280058a438a5bc0c672a63a8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.299
       objectReference: {fileID: 0}
     - target: {fileID: 8244673083425965710, guid: 5ce33087280058a438a5bc0c672a63a8, type: 3}
       propertyPath: playerMovement
