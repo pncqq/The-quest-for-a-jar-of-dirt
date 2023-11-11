@@ -10,7 +10,7 @@ public class enemyPatrol : MonoBehaviour
     [SerializeField] private GameObject pointA;
     [SerializeField] private GameObject pointB;
     private Rigidbody2D _rb;
-    private Animator _animator;
+    public Animator _animator;
     private Transform _currPoint;
     private bool isIdle;
 

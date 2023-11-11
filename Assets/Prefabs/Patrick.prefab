@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 7958346340159323646}
   - component: {fileID: 3327165290950275908}
   - component: {fileID: 6900941839727084033}
+  - component: {fileID: 3432380536704783937}
   m_Layer: 7
   m_Name: EnemyAwareness
   m_TagString: Untagged
@@ -188,6 +189,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 7072181175079472362}
   speedIncrease: 3
+--- !u!95 &3432380536704783937
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291739040140852819}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b31cf849175c054aacc30c584eae993, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8369355479031037134
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {fileID: 5645509386683093917}
   pointB: {fileID: 1082951216468819426}
+  _animator: {fileID: 0}
   speed: 2
 --- !u!114 &1640568088616151105
 MonoBehaviour:
