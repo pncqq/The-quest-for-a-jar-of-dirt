@@ -7,6 +7,7 @@ public class BasicPlayerMovement : MonoBehaviour
     //Compontents
     private Rigidbody2D _rb;
     private BoxCollider2D _boxCollider2D;
+    public ParticleSystem dust;
     [SerializeField] private LayerMask jumpableGround;
 
     //Movement
@@ -53,6 +54,7 @@ public class BasicPlayerMovement : MonoBehaviour
         //Jump check
         if (Input.GetButtonDown("Jump"))
         {
+            dust.Play();
             if (IsGrounded() || _doubleJump)
             {
                 _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -105,6 +107,7 @@ public class BasicPlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && walljumpingCounter > 0)
         {
+            dust.Play();
             isWallJumping = true;
             _rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             walljumpingCounter = 0f;
@@ -150,6 +153,7 @@ public class BasicPlayerMovement : MonoBehaviour
         //Left-right movement & sprite orientation
         if (IsFacingRight && XInput < 0f || !IsFacingRight && XInput > 0f)
         {
+            dust.Play();
             IsFacingRight = !IsFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
