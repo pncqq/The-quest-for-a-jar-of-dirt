@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private Rigidbody2D _playerRB;
     private Animator _animator;
-    private int _currentHealth;
+    private double _currentHealth;
     private Collider2D _collider2D;
     private Rigidbody2D _rb;
 
@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     //Taking damage
-    public void TakeDamage(int damage)
+    public void TakeDamage(double damage)
     {
         _currentHealth -= damage;
         _animator.SetTrigger(IsHurt);

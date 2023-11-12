@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -10,8 +8,10 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
     public PlayerAnimationController playerAnimController;
     private double _lastAttackedAt;
-    [SerializeField] private int attackPower = 30;
+    [SerializeField] private double attackPower = 30;
+    internal double StrengthBoost = 1;
     [SerializeField] private float attackRange = 0.5f;
+    private float _lockedTill;
 
 
     private void Update()
@@ -38,7 +38,21 @@ public class PlayerCombat : MonoBehaviour
         //Damage enemies
         foreach (var enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(attackPower);
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackPower * LockState(StrengthBoost, 15f));
+        }
+
+        //Change StrengthBoost to 1 after time
+        if (Time.time > _lockedTill)
+        {
+            StrengthBoost = 1;
+        }
+
+
+        //Locking method
+        double LockState(double s, float t)
+        {
+            _lockedTill = Time.time + t;
+            return s;
         }
     }
 
