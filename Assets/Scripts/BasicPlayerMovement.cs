@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BasicPlayerMovement : MonoBehaviour
 {
-    public static float Horizontal;
-    public static Vector2 Velocity;
+    internal float Horizontal;
+    internal Vector2 Velocity;
     private const float Speed = 5f;
     private const float JumpingPower = 7.5f;
     private bool _isFacingRight = true;
@@ -34,6 +33,9 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //Zmienna do animacji potrzebna yasss bitch purrr
+        Velocity = _rb.velocity;
+
         Horizontal = Input.GetAxisRaw("Horizontal");
         _lastOnGroundTime -= Time.deltaTime;
         _lastPressedJumpTime -= Time.deltaTime;
@@ -110,7 +112,7 @@ public class BasicPlayerMovement : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         IsGroundedVar = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         return IsGroundedVar;

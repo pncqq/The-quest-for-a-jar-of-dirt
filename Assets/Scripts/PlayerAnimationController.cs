@@ -1,17 +1,18 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
     //====================FIELDS===========================/
     private Animator _animator;
+    private BasicPlayerMovement _basicPlayerMovement;
 
     internal float AttackDelay;
     private float _airAttackDelay;
     private float _hitDelay;
     private float _hitSwordDelay;
+    private float _playerGround;
+    private float _playerGroundSword;
     private float _deadHitDelay;
     private float _deadGroundDelay;
     private string _currentAnimation;
@@ -27,6 +28,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         //Initialize
         _animator = GetComponent<Animator>();
+        _basicPlayerMovement = GetComponent<BasicPlayerMovement>();
 
         //Get attackDelay state length and attackAir
         var clips = _animator.runtimeAnimatorController.animationClips;
@@ -52,6 +54,12 @@ public class PlayerAnimationController : MonoBehaviour
                 case "Player_Dead_Ground":
                     _deadGroundDelay = clip.length + 1.5f;
                     break;
+                case "Player_Ground":
+                    _playerGround = clip.length;
+                    break;
+                case "Player_GroundSword":
+                    _playerGroundSword = clip.length;
+                    break;
             }
         }
     }
@@ -67,7 +75,8 @@ public class PlayerAnimationController : MonoBehaviour
             _isAttacking = true;
 
         //Update Ground Check
-        _isGrounded = BasicPlayerMovement.IsGroundedVar;
+        // _isGrounded = BasicPlayerMovement.is;
+        _isGrounded = _basicPlayerMovement.IsGrounded();
 
         //Animation state & CrossFade animation
         var state = GetState();
@@ -103,27 +112,42 @@ public class PlayerAnimationController : MonoBehaviour
         }
 
         //Movement animations
-
         if (!IsSworded)
-            return _isGrounded switch
+        {
+            switch (_isGrounded)
             {
+                //Ground animation
+                case true when _previousState == Fall:
+                    return LockState(Ground, _playerGround);
                 //Run and idle animation
-                true => BasicPlayerMovement.Horizontal != 0 ? Run : Idle,
+                case true:
+                    return _basicPlayerMovement.Horizontal != 0 ? Run : Idle;
                 //Jumping animation
-                false when BasicPlayerMovement.Velocity.y > 0 => Jump,
-                false => Fall
-            };
+                case false when _basicPlayerMovement.Velocity.y > 0:
+                    return Jump;
+                case false:
+                    _previousState = Fall;
+                    return Fall;
+            }
+        }
 
         if (!_isAttacking)
         {
-            return _isGrounded switch
+            switch (_isGrounded)
             {
+                //Ground animation
+                case true when _previousState == FallSword:
+                    return LockState(GroundSword, _playerGroundSword);
                 //Run and idle animation
-                true => BasicPlayerMovement.Horizontal != 0 ? RunSword : IdleSword,
+                case true:
+                    return _basicPlayerMovement.Horizontal != 0 ? RunSword : IdleSword;
                 //Jumping animation
-                false when BasicPlayerMovement.Velocity.y > 0 => JumpSword,
-                false => FallSword
-            };
+                case false when _basicPlayerMovement.Velocity.y > 0:
+                    return JumpSword;
+                case false:
+                    _previousState = FallSword;
+                    return FallSword;
+            }
         }
 
         _isAttacking = false;
