@@ -1,160 +1,182 @@
+
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(SpriteRenderer))]
 public class BasicPlayerMovement : MonoBehaviour
 {
-    //Compontents
-    private Rigidbody2D _rb;
-    private BoxCollider2D _boxCollider2D;
-    public ParticleSystem dust;
-    [SerializeField] private LayerMask jumpableGround;
-
-    //Movement
-    [SerializeField] private float speed = 5;
-    [SerializeField] private float jumpForce = 5;
-    public static float XInput;
-    private bool _doubleJump;
-    public static bool IsFacingRight = true;
+    public static float Horizontal;
     public static Vector2 Velocity;
-    public static bool IsMoving;
+    private const float Speed = 5f;
+    private const float JumpingPower = 7.5f;
+    private bool _isFacingRight = true;
+    private const float  CoyoteTime = 0.3f;
+
+    private bool _isWallSliding;
+    private const float WallSlidingSpeed = 2f;
+
+    private bool _isWallJumping;
+    private float _wallJumpingDirection;
+    private const float WallJumpingTime = 0.2f;
+    private float _wallJumpingCounter;
+    private const float WallJumpingDuration = 0.4f;
+    private readonly Vector2 _wallJumpingPower = new Vector2(5f, 7.5f);
     public static bool IsGroundedVar;
 
-
-    private bool isWallSliding;
-    private float wallSlidingSpeed = 2;
-    private bool isWallJumping;
-    private float wallJumpingDirection;
-    private float wallJumpingTime = 0.2f;
-    private float walljumpingCounter;
-    private float wallJumpingDuration = 0.4f;
-    private Vector2 wallJumpingPower = new Vector2(8f, 8f);
-
-
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform wallCheck;
+    [SerializeField] private LayerMask wallLayer;
+    private float _lastPressedJumpTime;
+    private bool _isJumping;
+    [SerializeField] private int doubleJump = 1;
+    private int _doubleJump;
+    private float _lastOnGroundTime;
 
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-        _boxCollider2D = GetComponent<BoxCollider2D>();
-    }
-
-    //Update is called once per frame
     private void Update()
     {
-        XInput = Input.GetAxisRaw("Horizontal");
-
-
-        if (IsGrounded() && !Input.GetButton("Jump"))
+        Horizontal = Input.GetAxisRaw("Horizontal");
+        _lastOnGroundTime -= Time.deltaTime;
+        _lastPressedJumpTime -= Time.deltaTime;
+        if (Input.GetButtonDown("Jump") )
         {
-            _doubleJump = false;
-        }
-
-        //Jump check
-        if (Input.GetButtonDown("Jump"))
-        {
-            dust.Play();
-            if (IsGrounded() || _doubleJump)
+            if (Input.GetButtonDown("Jump"))
             {
-                _rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-                _doubleJump = !_doubleJump;
+                _lastPressedJumpTime = 0.3f;
+                if (CanJump() && _lastPressedJumpTime > 0)
+                {
+                    _isJumping = true;
+                    Jump();
+                }
+                else if (_lastPressedJumpTime > 0 && _doubleJump > 0)
+                {
+                    _isJumping = true;
+                    _doubleJump--;
+                    Jump();
+                }
             }
         }
-
+        
         WallSlide();
         WallJump();
+        if (!_isJumping)
+        {
+            if (IsGrounded())
+            {
+                _lastOnGroundTime = CoyoteTime;
+                _doubleJump = doubleJump;
+            }
+        }
+        if (_isJumping && _rb.velocity.y < 0)
+        {
+            _isJumping = false;
+        }
+
+        if (!_isWallJumping)
+        {
+            Flip();
+        }
+    }
+
+    
+
+    private bool CanJump()
+    {
+        return _lastOnGroundTime > 0 && !_isJumping;
+    }
+    private void Jump()
+    {
+        _lastPressedJumpTime = 0;
+        _lastOnGroundTime = 0;
+        var force = JumpingPower;
+        if (_rb.velocity.y < 0) // jeśli postać już spada wzmocniony będzie skok
+        {
+            force -= _rb.velocity.y;
+        }
+
+        if (_rb.velocity.y > 0)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f); // unikniecie wysokiego wyskoku podczas 2 x spacja
+        }
+        _rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        
+    }
+    private void FixedUpdate()
+    {
+        if (!_isWallJumping)
+        {
+            _rb.velocity = new Vector2(Horizontal * Speed, _rb.velocity.y);
+        }
     }
 
     private bool IsGrounded()
     {
-        IsGroundedVar =
-            Physics2D.BoxCast(_boxCollider2D.bounds.center, _boxCollider2D.bounds.size, 0f, Vector2.down, .1f,
-                jumpableGround);
+        IsGroundedVar = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         return IsGroundedVar;
     }
 
     private bool IsWalled()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, jumpableGround);
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
     private void WallSlide()
     {
-        if (IsWalled() && !IsGrounded() && XInput != 0f)
+        if (IsWalled() && !IsGrounded() && Horizontal != 0f)
         {
-            isWallSliding = true;
-            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            _isWallSliding = true;
+            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -WallSlidingSpeed, float.MaxValue));
         }
         else
         {
-            isWallSliding = false;
+            _isWallSliding = false;
         }
     }
 
     private void WallJump()
     {
-        if (isWallSliding)
+        if (_isWallSliding)
         {
-            isWallJumping = false;
-            wallJumpingDirection = -transform.localScale.x;
-            walljumpingCounter = wallJumpingTime;
+            _isWallJumping = false;
+            _wallJumpingDirection = -transform.localScale.x;
+            _wallJumpingCounter = WallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
         }
         else
         {
-            walljumpingCounter -= Time.deltaTime;
+            _wallJumpingCounter -= Time.deltaTime;
         }
+       
 
-        if (Input.GetButtonDown("Jump") && walljumpingCounter > 0)
+        if (Input.GetButtonDown("Jump") && _wallJumpingCounter > 0f)
         {
-            dust.Play();
-            isWallJumping = true;
-            _rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
-            walljumpingCounter = 0f;
+            _isWallJumping = true;
+            _rb.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
+            _wallJumpingCounter = 0f;
 
-            if (transform.localScale.x != wallJumpingDirection)
+            if (transform.localScale.x != _wallJumpingDirection)
             {
-                IsFacingRight = !IsFacingRight;
+                _isFacingRight = !_isFacingRight;
                 Vector3 localScale = transform.localScale;
                 localScale.x *= -1f;
                 transform.localScale = localScale;
             }
+
+            Invoke(nameof(StopWallJumping), WallJumpingDuration);
         }
     }
 
     private void StopWallJumping()
     {
-        isWallJumping = false;
+        _isWallJumping = false;
     }
-
-
-    private void FixedUpdate()
-    {
-        //Variables
-        Velocity = new Vector2(XInput * speed, _rb.velocity.y);
-        IsMoving = Velocity.x != 0;
-
-        //Move
-        _rb.velocity = Velocity;
-
-        //Jump
-        if (!isWallJumping)
-        {
-            _rb.velocity = new Vector2(XInput * speed, _rb.velocity.y);
-        }
-
-        //Flip sprite
-        Flip();
-    }
-
 
     private void Flip()
     {
-        //Left-right movement & sprite orientation
-        if (IsFacingRight && XInput < 0f || !IsFacingRight && XInput > 0f)
+        if (_isFacingRight && Horizontal < 0f || !_isFacingRight && Horizontal > 0f)
         {
-            dust.Play();
-            IsFacingRight = !IsFacingRight;
+            _isFacingRight = !_isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;

@@ -108,7 +108,7 @@ public class PlayerAnimationController : MonoBehaviour
             return _isGrounded switch
             {
                 //Run and idle animation
-                true => BasicPlayerMovement.XInput != 0 ? Run : Idle,
+                true => BasicPlayerMovement.Horizontal != 0 ? Run : Idle,
                 //Jumping animation
                 false when BasicPlayerMovement.Velocity.y > 0 => Jump,
                 false => Fall
@@ -119,7 +119,7 @@ public class PlayerAnimationController : MonoBehaviour
             return _isGrounded switch
             {
                 //Run and idle animation
-                true => BasicPlayerMovement.XInput != 0 ? RunSword : IdleSword,
+                true => BasicPlayerMovement.Horizontal != 0 ? RunSword : IdleSword,
                 //Jumping animation
                 false when BasicPlayerMovement.Velocity.y > 0 => JumpSword,
                 false => FallSword
