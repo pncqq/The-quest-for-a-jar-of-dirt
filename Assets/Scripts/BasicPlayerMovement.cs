@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +8,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private const float Speed = 5f;
     private const float JumpingPower = 7.5f;
     private bool _isFacingRight = true;
-    private const float  CoyoteTime = 0.3f;
+    private const float CoyoteTime = 0.3f;
 
     private bool _isWallSliding;
     private const float WallSlidingSpeed = 2f;
@@ -38,7 +37,7 @@ public class BasicPlayerMovement : MonoBehaviour
         Horizontal = Input.GetAxisRaw("Horizontal");
         _lastOnGroundTime -= Time.deltaTime;
         _lastPressedJumpTime -= Time.deltaTime;
-        if (Input.GetButtonDown("Jump") )
+        if (Input.GetButtonDown("Jump"))
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -56,7 +55,7 @@ public class BasicPlayerMovement : MonoBehaviour
                 }
             }
         }
-        
+
         WallSlide();
         WallJump();
         if (!_isJumping)
@@ -67,6 +66,7 @@ public class BasicPlayerMovement : MonoBehaviour
                 _doubleJump = doubleJump;
             }
         }
+
         if (_isJumping && _rb.velocity.y < 0)
         {
             _isJumping = false;
@@ -78,12 +78,12 @@ public class BasicPlayerMovement : MonoBehaviour
         }
     }
 
-    
 
     private bool CanJump()
     {
         return _lastOnGroundTime > 0 && !_isJumping;
     }
+
     private void Jump()
     {
         _lastPressedJumpTime = 0;
@@ -98,9 +98,10 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, 0f); // unikniecie wysokiego wyskoku podczas 2 x spacja
         }
+
         _rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-        
     }
+
     private void FixedUpdate()
     {
         if (!_isWallJumping)
@@ -147,7 +148,7 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             _wallJumpingCounter -= Time.deltaTime;
         }
-       
+
 
         if (Input.GetButtonDown("Jump") && _wallJumpingCounter > 0f)
         {
