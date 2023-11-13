@@ -7,7 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
     //====================FIELDS===========================/
     private Animator _animator;
     private BasicPlayerMovement _basicPlayerMovement;
-    [SerializeField] private DustSystem dustSystem;
+    public DustSystem dustSystem;
 
     internal float AttackDelay;
     private float _airAttackDelay;
@@ -120,7 +120,7 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 //Ground animation
                 case true when _previousState == Fall:
-                    dustSystem.isGrounding = true;
+                    dustSystem.IsGrounding = true;
                     return LockState(Ground, _playerGround);
                 //Run and idle animation
                 case true:
@@ -140,7 +140,7 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 //Ground animation
                 case true when _previousState == FallSword:
-                    dustSystem.isGrounding = true;
+                    dustSystem.IsGrounding = true;
                     return LockState(GroundSword, _playerGroundSword);
                 //Run and idle animation
                 case true:

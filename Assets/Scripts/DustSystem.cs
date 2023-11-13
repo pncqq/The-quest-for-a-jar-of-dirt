@@ -6,7 +6,7 @@ public class DustSystem : MonoBehaviour
     private ParticleSystem.VelocityOverLifetimeModule _velocityOvTime;
     private ParticleSystem.SizeOverLifetimeModule _sizeOverLifetime;
     private ParticleSystemRenderer _dustRenderer;
-    public bool isGrounding;
+    internal bool IsGrounding;
 
     private void Awake()
     {
@@ -26,8 +26,8 @@ public class DustSystem : MonoBehaviour
     private void GroundDust()
     {
         //Send to AnimationController
-        if (!isGrounding) return;
-        isGrounding = false;
+        if (!IsGrounding) return;
+        IsGrounding = false;
 
         //Dust settings
         _velocityOvTime.x = -3.28f;
