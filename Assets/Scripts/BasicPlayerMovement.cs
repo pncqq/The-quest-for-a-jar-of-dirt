@@ -1,9 +1,16 @@
+using System;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class BasicPlayerMovement : MonoBehaviour
 {
-    internal float Horizontal;
+    //Filip meow
     internal Vector2 Velocity;
+    internal static bool isFlippinOnGround;
+    internal static bool isWallJumpin;
+
+
+    internal float Horizontal;
     private const float Speed = 5f;
     private const float JumpingPower = 7.5f;
     private bool _isFacingRight = true;
@@ -30,9 +37,12 @@ public class BasicPlayerMovement : MonoBehaviour
     [SerializeField] private int doubleJump = 1;
     private int _doubleJump;
     private float _lastOnGroundTime;
+    private bool _wasGrounded;
+
 
     private void Update()
     {
+        //FILIP
         //Zmienna do animacji potrzebna yasss bitch purrr
         Velocity = _rb.velocity;
 
@@ -154,6 +164,9 @@ public class BasicPlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && _wallJumpingCounter > 0f)
         {
+            //FILIP
+            isWallJumpin = true;
+
             _isWallJumping = true;
             _rb.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
             _wallJumpingCounter = 0f;
@@ -179,6 +192,12 @@ public class BasicPlayerMovement : MonoBehaviour
     {
         if (_isFacingRight && Horizontal < 0f || !_isFacingRight && Horizontal > 0f)
         {
+            //FILIP
+            if (IsGrounded())
+            {
+                isFlippinOnGround = true;
+            }
+
             _isFacingRight = !_isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
