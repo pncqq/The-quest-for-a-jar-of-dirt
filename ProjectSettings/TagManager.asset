@@ -17,7 +17,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background_sky
   - Water
   - UI
   - Ground
@@ -47,8 +47,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
+  - name: Background_cave
     uniqueID: 2710593455
+    locked: 0
+  - name: Background_Sky
+    uniqueID: 3159111371
     locked: 0
   - name: Enemy
     uniqueID: 854631581
