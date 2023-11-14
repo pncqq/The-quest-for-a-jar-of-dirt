@@ -6,6 +6,8 @@ public class PlayerAnimationController : MonoBehaviour
 {
     //====================FIELDS===========================/
     private Animator _animator;
+    [SerializeField] private Animator animAttackPoint;
+    [SerializeField] private Animator animAttackJumpPoint;
     private BasicPlayerMovement _basicPlayerMovement;
     public DustSystem dustSystem;
 
@@ -157,11 +159,32 @@ public class PlayerAnimationController : MonoBehaviour
         _isAttacking = false;
 
         //Attack 
-        return !_isGrounded
-            ? LockState(_previousState == AirAttack1 ? AirAttack2 : AirAttack1, _airAttackDelay)
-            : _previousState == Attack1
-                ? LockState(Attack2, AttackDelay)
-                : LockState(_previousState == Attack2 ? Attack3 : Attack1, AttackDelay);
+        if (!_isGrounded)
+        {
+            if (_previousState == AirAttack1)
+            {
+                animAttackJumpPoint.SetTrigger(AirAttackEffect2);
+                return LockState(AirAttack2, _airAttackDelay);
+            }
+
+            animAttackJumpPoint.SetTrigger(AirAttackEffect1);
+            return LockState(AirAttack1, _airAttackDelay);
+        }
+
+        if (_previousState == Attack1)
+        {
+            animAttackPoint.SetTrigger(AttackEffect2);
+            return LockState(Attack2, AttackDelay);
+        }
+
+        if (_previousState == Attack2)
+        {
+            animAttackPoint.SetTrigger(AttackEffect3);
+            return LockState(Attack3, AttackDelay);
+        }
+
+        animAttackPoint.SetTrigger(AttackEffect1);
+        return LockState(Attack1, AttackDelay);
 
         //Locking anim method
         int LockState(int s, float t)
@@ -198,6 +221,13 @@ public class PlayerAnimationController : MonoBehaviour
     private static readonly int Attack3 = Animator.StringToHash("Player_Attack3");
     private static readonly int AirAttack1 = Animator.StringToHash("Player_AirAttack1");
     private static readonly int AirAttack2 = Animator.StringToHash("Player_AirAttack2");
+
+    //Effects anims
+    private static readonly int AttackEffect2 = Animator.StringToHash("Attack2");
+    private static readonly int AttackEffect3 = Animator.StringToHash("Attack3");
+    private static readonly int AttackEffect1 = Animator.StringToHash("Attack1");
+    private static readonly int AirAttackEffect2 = Animator.StringToHash("AirAttack2");
+    private static readonly int AirAttackEffect1 = Animator.StringToHash("AirAttack1");
 
     #endregion
 }
