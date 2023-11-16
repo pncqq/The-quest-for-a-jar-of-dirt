@@ -18,7 +18,7 @@ public class Finish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Krab"))
+        if (other.gameObject.CompareTag("Finish"))
         {
             int playerCoins = CollectibleCounter.instance.gCoinCount; // Załóżmy, że jest taka metoda
 
