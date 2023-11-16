@@ -8,7 +8,7 @@ public class Dialogue : MonoBehaviour
 {
  public GameObject window;
  public GameObject indicator;
- public List<string> dialogues;
+ public static List<string> dialogues;
  public TMP_Text dialogueText;
  public float writingSpeed = 0.05f;
 
@@ -63,6 +63,13 @@ public class Dialogue : MonoBehaviour
    ToggleWindow(false);
    
  }
+ 
+ public  void StartDialogueWithContent(List<string> newDialogues)
+ {
+     dialogues = newDialogues;
+     StartDialogue();
+ }
+
  //logic
  IEnumerator Writing()
  {
