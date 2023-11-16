@@ -14,6 +14,6 @@ public class SpikesScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        HealthSystem.Instance.TakeDamage(damage);
+        HealthSystem.Instance.TakeDamage(damage, _rb);
     }
 }

@@ -19,7 +19,7 @@ public class EnemyAttack : MonoBehaviour
             {
                 playerMovement.knockbackRight = false;
             }
-            HealthSystem.Instance.TakeDamage(dmg);
+            HealthSystem.instance.TakeDamage(dmg);
         }
     }
 }
