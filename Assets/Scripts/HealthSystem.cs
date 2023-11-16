@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public static HealthSystem instance;
+    public static HealthSystem Instance;
     public int maxHealth = 100;
     public int currentHealth;
+    internal bool IsDead;
+    internal bool IsHit;
     public HealthBar healthBar;
     
     
@@ -15,7 +17,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         
