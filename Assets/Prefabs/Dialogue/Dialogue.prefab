@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2292960328759646744}
   - component: {fileID: 6001848645150314794}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.9300337, y: 0.09241533, z: 17.020832, w: 4.662143}
+  m_margin: {x: 1.4638233, y: 0.1750772, z: 16.417141, w: 4.5133514}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4686146207896795357}
+  - component: {fileID: 4147374460744078423}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -279,8 +280,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054893577144609075}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.839213, y: -2.3931055, z: 0.06308469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.7992134, y: 0.1968944, z: 0.0630846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -288,6 +289,26 @@ Transform:
   - {fileID: 2292960328759646744}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4147374460744078423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054893577144609075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f89faccf80312448bb573d932e82f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  window: {fileID: 7536371598660012058}
+  indicator: {fileID: 557438417365842658}
+  dialogues:
+  - Siema
+  - P
+  - "Gdzie s\u0105 pieni\u0105dze za las?"
+  dialogueText: {fileID: 2013355462374963239}
+  writingSpeed: 0.05
 --- !u!1 &7536371598660012058
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,8 +368,8 @@ Transform:
   m_GameObject: {fileID: 8364948855321967594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.563, y: 0.607, z: 469}
-  m_LocalScale: {x: 2.153125, y: 1.3875, z: 1}
+  m_LocalPosition: {x: 2.122, y: 0.448, z: 469}
+  m_LocalScale: {x: 1.0683591, y: 0.6884637, z: 0.49619}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2611503604582614395}
@@ -394,7 +415,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5f89e88c8abbff49807bb6aa2ee72b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 869011518e9fd1f44b5833e0ddc212d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
