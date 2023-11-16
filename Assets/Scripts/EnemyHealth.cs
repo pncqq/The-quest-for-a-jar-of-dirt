@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -9,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     private double _currentHealth;
     private Collider2D _collider2D;
     private Rigidbody2D _rb;
+    [SerializeField] private enemyPatrol patrol;
 
     //Animator fields
     private static readonly int IsHurt = Animator.StringToHash("isHurt");
@@ -40,18 +43,20 @@ public class EnemyHealth : MonoBehaviour
         if (_currentHealth <= 0)
         {
             //Die
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
         //Die animation
         _animator.SetBool(IsDead, true);
+        Destroy(patrol);
         _rb.AddForce(new Vector2(transform.position.x, 100f));
         //Disable enemy
         _collider2D.enabled = false;
         enabled = false;
-        
+        yield return new WaitForSeconds(2f);
+        Destroy(transform.parent.gameObject);
     }
 }

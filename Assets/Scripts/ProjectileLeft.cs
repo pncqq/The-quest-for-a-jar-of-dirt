@@ -25,7 +25,7 @@ public class ProjectileLeft : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
-            HealthSystem.Instance.TakeDamage(50, _rb);
+            HealthSystem.instance.TakeDamage(50);
         if(!other.CompareTag("Enemy"))
             Destroy(gameObject);
         
