@@ -12,7 +12,7 @@ namespace MENU
         
         private void Awake()
         {
-            pauseMenuUI.SetActive(true);
+            pauseMenuUI.SetActive(false);
         }
 
         void Update()
