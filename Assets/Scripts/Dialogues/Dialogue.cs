@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Dialogues
 {
@@ -17,6 +18,9 @@ namespace Dialogues
         private int _charIndex;
         private bool _started;
         private bool _waitForNext;
+
+        private bool _endLevel;
+        private string nextLevel;
 
         private void Awake()
         {
@@ -38,12 +42,16 @@ namespace Dialogues
         {
             if (sentences != null && sentences.Count > 0)
             {
+                _endLevel  = sentences.Count >= 2 && sentences[(dialogues.Count - 2)] == "End level";
+                if (_endLevel)
+                {
+                    nextLevel = sentences[dialogues.Count - 1];
+                    
+                }
+                
                 dialogues = sentences;
+                
                 StartDialogue();
-            }
-            else
-            {
-                Debug.LogWarning("Empty or null list of sentences provided.");
             }
         }
  
@@ -71,17 +79,28 @@ namespace Dialogues
         //End dialogue
         public void EndDialogue()
         {
+            if (_endLevel)
+            {
+                SceneManager.LoadScene(nextLevel);
+            }
             _started = false;
             _waitForNext = false;
             StopAllCoroutines();
             ToggleWindow(false);
-   
+           
+
         }
         //logic
         IEnumerator Writing()
         {
             yield return new WaitForSeconds(writingSpeed);
             string currentDialogue = dialogues[_index];
+            if (dialogues[_index] == "End level")
+            {
+                EndDialogue();
+                SceneManager.LoadScene(nextLevel);
+            }
+            
             dialogueText.text += currentDialogue[_charIndex];
             _charIndex++;
             if (_charIndex < currentDialogue.Length)
@@ -107,10 +126,12 @@ namespace Dialogues
                 _waitForNext = false;
          
                 _index++;
+                
          
                 if (_index<dialogues.Count)
                 {
                     GetDialogue(_index);
+                    
                 }
                 else
                 {
@@ -120,4 +141,5 @@ namespace Dialogues
             }
         }
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Dialogues
 {
@@ -10,6 +11,8 @@ namespace Dialogues
             public Dialogue dialogueScript;
             private readonly List<string> _sentences = new List<string>();
             private int _requiredCoins = 2;
+            public string nextLevel;
+            
             
             
             private void OnTriggerEnter2D(Collider2D other)
@@ -27,7 +30,8 @@ namespace Dialogues
                     _sentences.Add("Gratulacje!");
                     _sentences.Add("Posiadasz wymaganą liczbę monet!");
                     _sentences.Add("Jednak to jeszcze nie koniec twojej przygody!");
-                    
+                    _sentences.Add("End level");
+                    _sentences.Add(nextLevel);
                 }
                 else
                 {
@@ -43,6 +47,7 @@ namespace Dialogues
                     _playerDetected = false;
                     dialogueScript.ToggleIndicator(_playerDetected);
                     dialogueScript.EndDialogue();
+                    
                 }
             }
 
