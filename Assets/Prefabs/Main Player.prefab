@@ -231,6 +231,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   doubleJump: 1
+  knockbackForce: 8
+  knockbackTimer: 0
+  knockbackTotal: 0.1
+  knockbackRight: 1
 --- !u!114 &291226264948164761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +250,6 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 0}
-  _playerRB: {fileID: 3345327997886150399}
   _playerMovement: {fileID: 4598037460983830253}
 --- !u!114 &8387442938240518326
 MonoBehaviour:

@@ -7,9 +7,9 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPointJumping;
     public LayerMask enemyLayers;
     public PlayerAnimationController playerAnimController;
-    private double _lastAttackedAt;
-    [SerializeField] private double attackPower = 30;
-    internal double StrengthBoost = 1;
+    private float _lastAttackedAt;
+    [SerializeField] private float attackPower = 30;
+    internal float StrengthBoost = 1;
     [SerializeField] private float attackRange = 0.5f;
     private float _lockedTill;
 
@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
         //Damage enemies
         foreach (var enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(attackPower * LockState(StrengthBoost, 15f));
+            enemy.GetComponent<EnemyHealth>().TakeDamage((float)(attackPower * LockState(StrengthBoost, 15f)));
         }
 
         //Change StrengthBoost to 1 after time

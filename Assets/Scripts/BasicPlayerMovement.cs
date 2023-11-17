@@ -38,6 +38,11 @@ public class BasicPlayerMovement : MonoBehaviour
     private int _doubleJump;
     private float _lastOnGroundTime;
     private bool _wasGrounded;
+    
+    public float knockbackForce;
+    public float knockbackTimer;
+    public float knockbackTotal;
+    public bool knockbackRight;
 
 
     private void Update()
@@ -116,9 +121,17 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_isWallJumping)
+        if (!_isWallJumping && knockbackTimer <= 0)
         {
             _rb.velocity = new Vector2(Horizontal * Speed, _rb.velocity.y);
+        }
+        else
+        {
+            if (knockbackRight)
+                _rb.velocity = new Vector2(-knockbackForce*2, knockbackForce/2);
+            else
+                _rb.velocity = new Vector2(knockbackForce*2, knockbackForce/2);
+            knockbackTimer -= Time.deltaTime;
         }
     }
 
