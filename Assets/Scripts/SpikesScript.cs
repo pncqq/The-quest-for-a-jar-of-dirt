@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class SpikesScript : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-
-    [SerializeField] private int damage;
-    [SerializeField] private Rigidbody2D _playerRB;
     
-
-    private void Awake()
+    [SerializeField] private int damage;
+    [SerializeField] private int knockup;
+    
+    private GameObject player;
+    
+    void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player");
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            _playerRB.velocity = new Vector2(0, 8f);
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, knockup);
             HealthSystem.Instance.TakeDamage(damage);
         }
     }

@@ -6,12 +6,12 @@ public class EnemyHealth : MonoBehaviour
 {
     //Fields
     [SerializeField] private float maxHealth = 100;
-    [SerializeField] private Rigidbody2D _playerRB;
     private Animator _animator;
     private float _currentHealth;
     private Collider2D _collider2D;
     private Rigidbody2D _rb;
     [SerializeField] private enemyPatrol patrol;
+    private GameObject player;
 
     //Animator fields
     private static readonly int IsHurt = Animator.StringToHash("isHurt");
@@ -26,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
         _currentHealth = maxHealth;
     }
 
@@ -34,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _currentHealth -= damage;
         _animator.SetTrigger(IsHurt);
-        Vector2 direction = new Vector2(150*(transform.position.x - _playerRB.transform.position.x), 75f);
+        Vector2 direction = new Vector2((transform.position.x - player.GetComponent<Rigidbody2D>().transform.position.x)*150f, 75f);
         
         _rb.AddForce(direction);
         

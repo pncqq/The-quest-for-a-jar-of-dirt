@@ -172,4 +172,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  _playerRB: {fileID: 3345327997886150399, guid: 54fd3747d8f074046bde801c87f24216, type: 3}
+  knockup: 15

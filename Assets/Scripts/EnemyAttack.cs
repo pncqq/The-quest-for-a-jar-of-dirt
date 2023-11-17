@@ -6,18 +6,24 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private int dmg;
-    [SerializeField] private BasicPlayerMovement playerMovement;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerMovement.knockbackTimer = playerMovement.knockbackTotal;
+            player.GetComponent<BasicPlayerMovement>().knockbackTimer = player.GetComponent<BasicPlayerMovement>().knockbackTotal;
             if (other.transform.position.x <= transform.position.x)
-                playerMovement.knockbackRight = true;
+                player.GetComponent<BasicPlayerMovement>().knockbackRight = true;
             else
             {
-                playerMovement.knockbackRight = false;
+                player.GetComponent<BasicPlayerMovement>().knockbackRight = false;
             }
             HealthSystem.Instance.TakeDamage(dmg);
         }
