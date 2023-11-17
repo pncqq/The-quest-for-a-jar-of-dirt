@@ -30,14 +30,14 @@ namespace MENU
             }
         }
 
-        public void Resume()
+        private void Resume()
         {
             pauseMenuUI.SetActive(false); // Ukryj menu pauzy
             Time.timeScale = 1f; // Wznów normalny bieg czasu
             isPaused = false;
         }
 
-        void Pause()
+        private void  Pause()
         {
             pauseMenuUI.SetActive(true); 
             Time.timeScale = 0f; 

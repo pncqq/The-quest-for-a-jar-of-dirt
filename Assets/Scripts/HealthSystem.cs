@@ -10,6 +10,7 @@ public class HealthSystem : MonoBehaviour
     internal bool IsHit;
 
     public HealthBar healthBar;
+    public GameObject restartMenu;
     
     [SerializeField] private BasicPlayerMovement _playerMovement;
 
@@ -19,13 +20,17 @@ public class HealthSystem : MonoBehaviour
         Instance = this;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        restartMenu.SetActive(false);
     }
 
     private void Update()
     {
         //Check if dead
         if (currentHealth <= 0)
+        {
             IsDead = true;
+            restartMenu.SetActive(true);
+        }
 
         //Nie zmniejszaj poniżej 0
         if (currentHealth < 0) currentHealth = 0;
