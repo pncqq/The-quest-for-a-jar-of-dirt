@@ -10,7 +10,7 @@ public class HealthSystem : MonoBehaviour
     internal bool IsHit;
 
     public HealthBar healthBar;
-    [SerializeField] Rigidbody2D _playerRB;
+    
     [SerializeField] private BasicPlayerMovement _playerMovement;
 
 
@@ -34,7 +34,7 @@ public class HealthSystem : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage, Rigidbody2D enemy)
+    public void TakeDamage(int damage)
     {
         //Update health
         currentHealth -= damage;
@@ -43,10 +43,7 @@ public class HealthSystem : MonoBehaviour
         //Update isHit field
         IsHit = true;
 
-        //Knockback
-        _playerRB.velocity = enemy.transform.position.x > transform.position.x
-            ? new Vector2(-1f, 5f)
-            : new Vector2(1f, 5f);
+        
     }
 
     public void Heal(int healSize)

@@ -22,7 +22,7 @@ public class StrengthPotion : MonoBehaviour
     private void Use()
     {
         //Boost strength
-        pc.StrengthBoost = 1.3;
+        pc.StrengthBoost = 1.3f;
         _animator.SetBool(IsUsed, true);
     }
     

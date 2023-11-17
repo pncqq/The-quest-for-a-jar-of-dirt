@@ -6,6 +6,8 @@ public class SpikesScript : MonoBehaviour
     private Rigidbody2D _rb;
 
     [SerializeField] private int damage;
+    [SerializeField] private Rigidbody2D _playerRB;
+    
 
     private void Awake()
     {
@@ -14,6 +16,10 @@ public class SpikesScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        HealthSystem.Instance.TakeDamage(damage, _rb);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            _playerRB.velocity = new Vector2(0, 8f);
+            HealthSystem.Instance.TakeDamage(damage);
+        }
     }
 }
