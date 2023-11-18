@@ -121,18 +121,20 @@ public class BasicPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_isWallJumping && knockbackTimer <= 0)
+        if (!_isWallJumping)
         {
-            _rb.velocity = new Vector2(Horizontal * Speed, _rb.velocity.y);
-        }
-        else
-        {
-            if (knockbackRight)
-                _rb.velocity = new Vector2(-knockbackForce*2, knockbackForce/2);
+            if (knockbackTimer > 0)
+            {
+                if (knockbackRight)
+                    _rb.velocity = new Vector2(-knockbackForce*2, knockbackForce/2);
+                else
+                    _rb.velocity = new Vector2(knockbackForce*2, knockbackForce/2);
+                knockbackTimer -= Time.deltaTime;
+            }
             else
-                _rb.velocity = new Vector2(knockbackForce*2, knockbackForce/2);
-            knockbackTimer -= Time.deltaTime;
+                _rb.velocity = new Vector2(Horizontal * Speed, _rb.velocity.y);
         }
+        
     }
 
     public bool IsGrounded()
