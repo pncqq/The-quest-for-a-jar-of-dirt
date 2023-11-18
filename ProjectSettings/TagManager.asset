@@ -56,6 +56,12 @@ TagManager:
   - name: Enemy
     uniqueID: 854631581
     locked: 0
+  - name: Player
+    uniqueID: 1470057533
+    locked: 0
+  - name: Water
+    uniqueID: 2818287053
+    locked: 0
   - name: Terrian
     uniqueID: 1294831185
     locked: 0
