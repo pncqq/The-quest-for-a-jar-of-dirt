@@ -13,8 +13,8 @@ public class enemyPatrol : MonoBehaviour
     public Animator _animator;
     private Transform _currPoint;
     private bool isIdle;
-
     public float speed;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,18 +40,18 @@ public class enemyPatrol : MonoBehaviour
         }
         if (Vector2.Distance(transform.position, _currPoint.position) < 0.5f && _currPoint == pointA.transform)
         {
-            StartCoroutine(startIdle());
+            StartCoroutine(StartIdle());
             _currPoint = pointB.transform;
             
         }
         if (Vector2.Distance(transform.position, _currPoint.position) < 0.5f && _currPoint == pointB.transform)
         {
-            StartCoroutine(startIdle());
+            StartCoroutine(StartIdle());
             _currPoint = pointA.transform;
         }
     }
 
-    private IEnumerator startIdle()
+    private IEnumerator StartIdle()
     {
         isIdle = true;
         Vector2 tmp = _rb.velocity;
@@ -59,12 +59,12 @@ public class enemyPatrol : MonoBehaviour
         _rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(Random.Range(1f,3f));
         _rb.velocity = tmp;
-        flip();
+        Flip();
         _animator.SetBool("IsPatrolling", true);
         isIdle = false;
     }
 
-    private void flip()
+    private void Flip()
     {
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
