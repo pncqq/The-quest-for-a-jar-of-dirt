@@ -223,8 +223,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003856222, y: 0.33008134}
-  m_Size: {x: 2.4643457, y: 0.06662173}
+  m_Offset: {x: 0.019417806, y: 0.34564146}
+  m_Size: {x: 2.4332252, y: 0.035501484}
   m_Direction: 1
 --- !u!1 &3684837901996540247
 GameObject:
@@ -237,8 +237,6 @@ GameObject:
   - component: {fileID: 7450293213834605206}
   - component: {fileID: 5291858432659679669}
   - component: {fileID: 4711326965265644945}
-  - component: {fileID: 7526686684913755720}
-  - component: {fileID: 4345330494798691272}
   m_Layer: 6
   m_Name: BottomOfBoat
   m_TagString: Untagged
@@ -362,36 +360,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &7526686684913755720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3684837901996540247}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2dfd2abaf7bf0b48a63fb03548b54a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointA: {fileID: 7365843297453519303}
-  pointB: {fileID: 1887950169403532453}
-  _animator: {fileID: 0}
-  isIdle: 1
-  isDone: 1
-  speed: 1
---- !u!114 &4345330494798691272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3684837901996540247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89c8c88acba71f4bbec22017bef4a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6031029969137337627
 GameObject:
   m_ObjectHideFlags: 0
