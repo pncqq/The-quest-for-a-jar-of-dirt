@@ -47,11 +47,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background_Sky
+    uniqueID: 3159111371
+    locked: 0
+  - name: Water_Reflections
+    uniqueID: 1118528079
+    locked: 0
+  - name: Clouds
+    uniqueID: 135915795
+    locked: 0
   - name: Background_cave
     uniqueID: 2710593455
     locked: 0
-  - name: Background_Sky
-    uniqueID: 3159111371
+  - name: Palm_Back
+    uniqueID: 2959745227
     locked: 0
   - name: Enemy
     uniqueID: 854631581
@@ -67,6 +76,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Palm_Front
+    uniqueID: 4100908121
     locked: 0
   - name: Front_design
     uniqueID: 3083812225
