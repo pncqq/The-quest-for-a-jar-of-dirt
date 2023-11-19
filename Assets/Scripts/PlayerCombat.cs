@@ -11,7 +11,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float attackPower = 30;
     internal float StrengthBoost = 1;
     [SerializeField] private float attackRange = 0.5f;
-    private float _lockedTill;
+    public float _lockedTill;
+    public float potionTime;
 
 
     private void Update()
@@ -19,7 +20,9 @@ public class PlayerCombat : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.F) || !playerAnimController.IsSworded) return;
 
         if (Time.time <= _lastAttackedAt + playerAnimController.AttackDelay) return;
-
+        potionTime -= Time.time;
+        if(potionTime <= 0)
+            StrengthBoost = 1;
         Attack();
         _lastAttackedAt = Time.time;
     }
@@ -41,11 +44,7 @@ public class PlayerCombat : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage((float)(attackPower * LockState(StrengthBoost, 15f)));
         }
 
-        //Change StrengthBoost to 1 after time
-        if (Time.time > _lockedTill)
-        {
-            StrengthBoost = 1;
-        }
+        
 
 
         //Locking method

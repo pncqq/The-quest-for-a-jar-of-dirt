@@ -16,7 +16,11 @@ public class StrengthPotion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
+        {
+            pc.potionTime = Time.time + 15f;
             Use();
+        }
+            
     }
 
     private void Use()
