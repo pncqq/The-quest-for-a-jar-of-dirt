@@ -50,6 +50,9 @@ TagManager:
   - name: Background_Sky
     uniqueID: 3159111371
     locked: 0
+  - name: Water_Reflections
+    uniqueID: 1118528079
+    locked: 0
   - name: Clouds
     uniqueID: 135915795
     locked: 0
