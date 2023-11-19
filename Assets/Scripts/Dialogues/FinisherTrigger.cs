@@ -28,7 +28,7 @@ namespace Dialogues
                 {
                     _sentences.Clear();
                     _sentences.Add("Gratulacje!");
-                    _sentences.Add("Posiadasz wymaganą liczbę monet!");
+                    _sentences.Add("Posiadasz wymagana liczbe monet!");
                     _sentences.Add("Jednak to jeszcze nie koniec twojej przygody!");
                     _sentences.Add("End level");
                     _sentences.Add(nextLevel);
@@ -36,7 +36,7 @@ namespace Dialogues
                 else
                 {
                     _sentences.Clear();
-                    _sentences.Add("Uzbieraj więcej monet frajerze!");
+                    _sentences.Add("Uzbieraj wiecej monet frajerze!");
                 }
             }
 
