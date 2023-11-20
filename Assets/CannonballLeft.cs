@@ -1,16 +1,19 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class CannonballLeft : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody2D _rb;
+    private Animator _animator;
+    private static readonly int IsDestroyed = Animator.StringToHash("isDestroyed");
 
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -26,12 +29,22 @@ public class CannonballLeft : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Destroy(gameObject);
-    }
-    
+        _animator.SetTrigger(IsDestroyed);
 
-    private void OnDestroy()
+        //Turn off physics
+        _rb.velocity = Vector2.zero;
+        _rb.isKinematic = true;
+        foreach (var coll in GetComponents<Collider2D>())
+        {
+            coll.enabled = false;
+        }
+
+        StartCoroutine(DestroyAfterAnimation());
+    }
+
+    private IEnumerator DestroyAfterAnimation()
     {
-        Debug.Log("Znszczone ;pp");
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length + 0.5f);
+        Destroy(gameObject);
     }
 }

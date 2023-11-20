@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CannonShoot : MonoBehaviour
@@ -8,9 +7,11 @@ public class CannonShoot : MonoBehaviour
     [SerializeField] private float waitBefore;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private Animator effect;
     private Animator _animator;
     private bool _playerInArea;
     private static readonly int CanShoot = Animator.StringToHash("Shoot");
+    private static readonly int Fire = Animator.StringToHash("Fire");
 
     private void Awake()
     {
@@ -36,12 +37,17 @@ public class CannonShoot : MonoBehaviour
 
     public IEnumerator Shoot()
     {
+        //Spawn projectile
         Instantiate(projectilePrefab, spawnPoint.transform.position, transform.rotation);
 
+        //Effect anim and shoot anim
+        effect.SetTrigger(Fire);
         _animator.SetBool(CanShoot, false);
 
+        //Wait
         yield return new WaitForSeconds(cooldown);
 
+        //Anim
         if (_playerInArea)
             _animator.SetBool(CanShoot, true);
     }
@@ -54,6 +60,5 @@ public class CannonShoot : MonoBehaviour
         if (!_playerInArea) yield break;
         
         _animator.SetBool(CanShoot, true);
-        StartCoroutine(Shoot());
     }
 }
