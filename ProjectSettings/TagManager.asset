@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Sword
   - CollapsingPlatform
+  - CannonBall
   layers:
   - Default
   - TransparentFX
