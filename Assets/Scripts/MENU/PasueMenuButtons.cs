@@ -21,7 +21,7 @@ namespace MENU
         public void LoadMenu()
         {
             Time.timeScale = 1f; 
-            SceneManager.LoadScene("Scenes/Start Scene"); 
+            SceneManager.LoadScene("Scenes/StartMenu"); 
         }
 
         public void QuitGame()
