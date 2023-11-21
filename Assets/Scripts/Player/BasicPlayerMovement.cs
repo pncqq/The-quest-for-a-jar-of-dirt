@@ -35,6 +35,7 @@ public class BasicPlayerMovement : MonoBehaviour
     private float _lastPressedJumpTime;
     private bool _isJumping;
     [SerializeField] private int doubleJump = 1;
+    [SerializeField] private bool wallJump = true;
     private int _doubleJump;
     private float _lastOnGroundTime;
     private bool _wasGrounded;
@@ -73,8 +74,13 @@ public class BasicPlayerMovement : MonoBehaviour
             }
         }
 
-        WallSlide();
-        WallJump();
+        if (wallJump)
+        {
+            WallSlide();
+            WallJump();
+        }
+
+        
         if (!_isJumping)
         {
             if (IsGrounded())
