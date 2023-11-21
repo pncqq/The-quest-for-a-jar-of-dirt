@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,9 +14,24 @@ namespace Dialogues
             private int _requiredCoins = 2;
             public int actualLevel;
             public string nextLevel;
-            
-            
-            
+
+            private void Awake()
+            {
+                
+                if (actualLevel == 1 && PlayerPrefs.GetInt("AllDiamonds1") == 1)
+                {
+                    RemoveAllDiamonds();
+                }
+                else if (actualLevel == 2 && PlayerPrefs.GetInt("AllDiamonds2") == 1)
+                {
+                    RemoveAllDiamonds();
+                }
+                else if (actualLevel == 3 && PlayerPrefs.GetInt("AllDiamonds3") == 1)
+                {
+                    RemoveAllDiamonds();
+                }
+            }
+
             private void OnTriggerEnter2D(Collider2D other)
             {
                 if (other.CompareTag("Player"))
@@ -49,6 +65,13 @@ namespace Dialogues
                 {
                     if (actualLevel == 1)
                     {
+                        PlayerPrefs.SetInt("Level1", 1);
+                        PlayerPrefs.SetInt("Diamonds1", CollectibleCounter.instance.dCount);
+                        if (CollectibleCounter.instance.dCount == 5)
+                        {
+                            PlayerPrefs.SetInt("AllDiamonds1", 1);
+                        }
+                        Debug.Log(PlayerPrefs.GetInt("Diamonds1"));
                         _sentences.Clear();
                         _sentences.Add("No, i teraz możemy rozmawiać…");
                         _sentences.Add("End level");
@@ -56,6 +79,13 @@ namespace Dialogues
                     }
                     else if (actualLevel == 2)
                     {
+                        PlayerPrefs.SetInt("Level2", 1);
+                        if (CollectibleCounter.instance.dCount == 5)
+                        {
+                            PlayerPrefs.SetInt("AllDiamonds2", 1);
+                        }
+                        PlayerPrefs.SetInt("Diamonds2", CollectibleCounter.instance.dCount);
+                       
                         _sentences.Clear();
                         _sentences.Add("No, i teraz możemy rozmawiać…");
                         _sentences.Add("End level");
@@ -63,12 +93,18 @@ namespace Dialogues
                     }
                     else if (actualLevel == 3)
                     {
+                        PlayerPrefs.SetInt("Level3", 1);
+                        if (CollectibleCounter.instance.dCount == 5)
+                        {
+                            PlayerPrefs.SetInt("AllDiamonds3", 1);
+                        }
+                        PlayerPrefs.SetInt("Diamonds3", CollectibleCounter.instance.dCount);
                         _sentences.Clear();
                         _sentences.Add("Szerokiej drogi  człowiecze! Niech Ci się wiedzie!");
                         _sentences.Add("End level");
                         _sentences.Add(nextLevel);
                     }
-                   
+                    PlayerPrefs.Save();
                 }
                 else
                 {
@@ -91,7 +127,16 @@ namespace Dialogues
                     
                 } 
             }
-
+            public void RemoveAllDiamonds()
+            {
+                GameObject[] diamonds = GameObject.FindGameObjectsWithTag("Diamond");
+                
+                foreach (var diamond in diamonds)
+                {
+                    Destroy(diamond);
+                }
+            }
+            
             private void OnTriggerExit2D(Collider2D other)
             {
                 if (other.CompareTag("Player"))
