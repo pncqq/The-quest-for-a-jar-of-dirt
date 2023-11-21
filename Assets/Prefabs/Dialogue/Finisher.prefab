@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6841820727684444620}
   - component: {fileID: 7269583072163093920}
-  - component: {fileID: 1148723169989055168}
   - component: {fileID: 9015288295190133422}
+  - component: {fileID: 6287648525117687805}
+  - component: {fileID: 1148723169989055168}
   m_Layer: 0
   m_Name: Finisher
   m_TagString: Untagged
@@ -73,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1470057533
+  m_SortingLayer: -1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 3f38a427300f1f44994133550b7bc0cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -87,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1148723169989055168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2725067578018082989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3fd6d9971d3468db0e9e29d1d917560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueScript: {fileID: 185214573400781041}
-  nextLevel: Start Scene
 --- !u!61 &9015288295190133422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,6 +133,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &6287648525117687805
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725067578018082989}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b8c72f4d1aeb5124eaf438bb236b2b67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1148723169989055168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725067578018082989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fd6d9971d3468db0e9e29d1d917560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueScript: {fileID: 185214573400781041}
+  nextLevel: Start Scene
 --- !u!1001 &4259398874343072934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,11 +178,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2013355462374963239, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
       propertyPath: m_text
-      value: LOREM IPSUM DOLOR SIT AMEN KURWA KURWO
+      value: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
       objectReference: {fileID: 0}
     - target: {fileID: 2013355462374963239, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
       propertyPath: m_fontSize
-      value: 3.45
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 2013355462374963239, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
       propertyPath: m_margin.w
@@ -226,6 +249,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 2292960328759646744, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292960328759646744, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292960328759646744, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.358
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292960328759646744, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 4147374460744078423, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
       propertyPath: writingSpeed
       value: 0.025
@@ -278,6 +317,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2949369544552200658, guid: ef8fb52323fac0f42846fe273b973315, type: 2}
+    - target: {fileID: 6001848645150314794, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001848645150314794, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1470057533
+      objectReference: {fileID: 0}
     - target: {fileID: 6221024178238006379, guid: 0dc32aa3c42a93746a97005a8a49f14c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4588444
