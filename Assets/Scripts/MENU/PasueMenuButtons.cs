@@ -36,7 +36,9 @@ namespace MENU
 
         public void RestartGame()
         {
+             
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
     }
 }
