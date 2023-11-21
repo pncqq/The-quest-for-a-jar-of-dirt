@@ -11,6 +11,7 @@ namespace Dialogues
             public Dialogue dialogueScript;
             private readonly List<string> _sentences = new List<string>();
             private int _requiredCoins = 2;
+            public int actualLevel;
             public string nextLevel;
             
             
@@ -24,20 +25,71 @@ namespace Dialogues
 
                 }
 
-                if (CollectibleCounter.instance.gCoinCount >= _requiredCoins)
+                if (CollectibleCounter.instance.gCoinCount == 0)
                 {
-                    _sentences.Clear();
-                    _sentences.Add("Gratulacje!");
-                    _sentences.Add("Posiadasz wymagana liczbe monet!");
-                    _sentences.Add("Jednak to jeszcze nie koniec twojej przygody!");
-                    _sentences.Add("End level");
-                    _sentences.Add(nextLevel);
+                    
+                    
+                    if (actualLevel == 1)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Żartujesz sobie? Jesteś biedny!");
+                    } else if (actualLevel == 2)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Nie denerwuj mnie");
+                       
+                    }
+                    else if (actualLevel == 3)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Kierowniku… Chcesz żebym umarł z głodu? Aż mi się ręce trzęsą. I to ze złości, nie z delirki.");
+                    }
+                    
+                } else if (CollectibleCounter.instance.gCoinCount >= _requiredCoins)
+                {
+                    if (actualLevel == 1)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("No, i teraz możemy rozmawiać…");
+                        _sentences.Add("End level");
+                        _sentences.Add(nextLevel);
+                    }
+                    else if (actualLevel == 2)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("No, i teraz możemy rozmawiać…");
+                        _sentences.Add("End level");
+                        _sentences.Add(nextLevel);
+                    }
+                    else if (actualLevel == 3)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Szerokiej drogi  człowiecze! Niech Ci się wiedzie!");
+                        _sentences.Add("End level");
+                        _sentences.Add(nextLevel);
+                    }
+                   
                 }
                 else
                 {
-                    _sentences.Clear();
-                    _sentences.Add("Uzbieraj wiecej monet frajerze!");
-                }
+                    if (actualLevel == 1)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Za mało! Przynieś więcej!");
+                    } else if (actualLevel == 2)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Za mało! Wracaj na te łódki!");
+                       
+                    }
+                    else if (actualLevel == 3)
+                    {
+                        _sentences.Clear();
+                        _sentences.Add("Szefie, super, ale to nawet na rum nie starczy.");
+                    }
+                   
+                    
+                } 
             }
 
             private void OnTriggerExit2D(Collider2D other)
