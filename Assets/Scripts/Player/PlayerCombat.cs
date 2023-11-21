@@ -1,28 +1,39 @@
 using UnityEngine;
 
+
 public class PlayerCombat : MonoBehaviour
 {
     //Fields
+    [SerializeField] private float attackPower = 30;
+    [SerializeField] private float attackRange = 0.5f;
+    private float _lastAttackedAt;
+    internal float StrengthBoost = 1;
     public Transform attackPoint;
     public Transform attackPointJumping;
     public LayerMask enemyLayers;
     public PlayerAnimationController playerAnimController;
-    private float _lastAttackedAt;
-    [SerializeField] private float attackPower = 30;
-    internal float StrengthBoost = 1;
-    [SerializeField] private float attackRange = 0.5f;
-    public float _lockedTill;
     public float potionTime;
 
 
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.F) || !playerAnimController.IsSworded) return;
+        // Reduce potion time by the time elapsed since the last frame
+        if (potionTime > 0)
+            potionTime -= Time.deltaTime;
 
-        if (Time.time <= _lastAttackedAt + playerAnimController.AttackDelay) return;
-        potionTime -= Time.time;
-        if(potionTime <= 0)
+        // Reset strength boost if potion effect has ended
+        if (potionTime <= 0 && StrengthBoost > 1)
+        {
             StrengthBoost = 1;
+            potionTime = 0;
+        }
+
+        //Check if player has sword
+        if (!Input.GetKeyDown(KeyCode.F) || !playerAnimController.IsSworded) return;
+        //Check if player still making animation of last attack
+        if (Time.time <= _lastAttackedAt + playerAnimController.AttackDelay) return;
+
+        //Attack
         Attack();
         _lastAttackedAt = Time.time;
     }
@@ -36,22 +47,11 @@ public class PlayerCombat : MonoBehaviour
             Physics2D.OverlapCircleAll(
                 !BasicPlayerMovement.IsGroundedVar ? attackPointJumping.position : attackPoint.position, attackRange,
                 enemyLayers);
-
-
+        
         //Damage enemies
         foreach (var enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage((float)(attackPower * LockState(StrengthBoost, 15f)));
-        }
-
-        
-
-
-        //Locking method
-        double LockState(double s, float t)
-        {
-            _lockedTill = Time.time + t;
-            return s;
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackPower * StrengthBoost);
         }
     }
 

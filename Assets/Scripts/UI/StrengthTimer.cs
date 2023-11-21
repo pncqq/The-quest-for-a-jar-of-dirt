@@ -1,40 +1,34 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class StrengthTimer : MonoBehaviour
 {
     [SerializeField] private TMP_Text strengthText;
-    private CanvasGroup cg;
     [SerializeField] private PlayerCombat pc;
+    private CanvasGroup _cg;
+    private double _count;
 
-    private double count;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        cg = GetComponent<CanvasGroup>();
-        count = Math.Round(pc.potionTime - Time.time);
-        strengthText.text = ": " + count;
+        _cg = GetComponent<CanvasGroup>();
+        strengthText.text = ": " + _count;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        count = Math.Round(pc.potionTime - Time.time);
-        strengthText.text = ": " + count;
-        if (count <= 0)
-        {
-            cg.alpha = 0f;
-            cg.blocksRaycasts = false;
-        }
-        else
-        {
-            cg.alpha = 1f;
-            cg.blocksRaycasts = true;
-        }
-            
+        _count = Math.Round(pc.potionTime);
 
+        // Zapobieganie ujemnym wartościom
+        if (_count < 0)
+        {
+            _count = 0;
+        }
+
+        strengthText.text = ": " + _count;
+
+        // Ukrywanie lub wyświetlanie UI w zależności od wartości count
+        _cg.alpha = _count > 0 ? 1f : 0f;
+        _cg.blocksRaycasts = _count > 0;
     }
 }
