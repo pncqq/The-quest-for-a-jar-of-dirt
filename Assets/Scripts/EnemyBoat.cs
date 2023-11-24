@@ -7,7 +7,6 @@ public class EnemyBoat : MonoBehaviour
     [SerializeField] private GameObject pointA;
     [SerializeField] private GameObject pointB;
     [SerializeField] private Animator animator;
-    [SerializeField] private float speed;
     [SerializeField] private float smoothTime;
     private Transform _currPoint;
     private Vector2 _currentVelocity;
@@ -66,7 +65,7 @@ public class EnemyBoat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             other.transform.SetParent(transform);
             // other.transform.SetParent(null);

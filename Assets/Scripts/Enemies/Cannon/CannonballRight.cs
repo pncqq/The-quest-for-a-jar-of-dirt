@@ -4,6 +4,7 @@ using UnityEngine;
 public class CannonballRight : MonoBehaviour
 {
     [SerializeField] private float speed;
+    private float _speedRandomizer;
     private Rigidbody2D _rb;
     private Animator _animator;
     private static readonly int IsDestroyed = Animator.StringToHash("isDestroyed");
@@ -17,7 +18,8 @@ public class CannonballRight : MonoBehaviour
 
     private void Start()
     {
-        _rb.velocity = transform.right * speed;
+        _speedRandomizer = Random.Range(0.8f, 1.5f);
+        _rb.velocity = transform.right * speed * _speedRandomizer;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
