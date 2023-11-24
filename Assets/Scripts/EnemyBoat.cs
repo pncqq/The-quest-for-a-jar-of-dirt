@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyBoat : MonoBehaviour
 {
@@ -10,65 +9,78 @@ public class EnemyBoat : MonoBehaviour
     [SerializeField] private float smoothTime;
     private Transform _currPoint;
     private Vector2 _currentVelocity;
+    private bool _isIdle = true;
+    private bool _isDone = true;
 
     private static readonly int IsSailing = Animator.StringToHash("IsSailing");
 
     private void Start()
     {
         _currPoint = pointB.transform;
+        _isIdle = false;
+        _isDone = false;
     }
 
     private void Update()
     {
-        //Move boat
-        // transform.position =
-        //     Vector2.Lerp(transform.position,
-        //         _currPoint.transform.position, speed * Time.deltaTime);
+        if (!_isIdle)
+        {
+            transform.position =
+                Vector2.SmoothDamp(transform.position,
+                    _currPoint.position, ref _currentVelocity, smoothTime);
+            animator.SetBool(IsSailing, true);
+            
+            _isIdle = false;
+            _isDone = false;
+        }
 
-        // transform.position =
-        //     Vector2.MoveTowards(transform.position,
-        //         _currPoint.position, speed * Time.deltaTime);
-        
-        transform.position = 
-            Vector2.SmoothDamp(transform.position,
-                _currPoint.position, ref _currentVelocity, smoothTime);
 
-        animator.SetBool(IsSailing, true);
-
-        
-        //Current positon
         if (Vector2.Distance(transform.position, _currPoint.position) < 0.5f && _currPoint == pointA.transform)
         {
             _currPoint = pointB.transform;
             animator.SetBool(IsSailing, false);
-            Flip();
+            _isIdle = true;
+            StartCoroutine(Flip());
         }
 
         if (!(Vector2.Distance(transform.position, _currPoint.position) < 0.5f) ||
             _currPoint != pointB.transform) return;
+        
         _currPoint = pointA.transform;
-
-        //
         animator.SetBool(IsSailing, false);
-        Flip();
+        _isIdle = true;
+        StartCoroutine(Flip());
     }
 
 
-    private void Flip()
+    private IEnumerator Flip()
     {
+        yield return new WaitForSeconds(1f);
+        
         var transform1 = transform;
         var localScale = transform1.localScale;
-
+        
         localScale.x *= -1;
         transform1.localScale = localScale;
+        
+        _isDone = true;
+        _isIdle = false;
     }
+
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+        if (!other.CompareTag("Player")) return;
+        
+        switch (_isIdle)
         {
-            other.transform.SetParent(transform);
-            // other.transform.SetParent(null);
+            case true when _isDone:
+            case false when !_isDone:
+                other.transform.SetParent(transform);
+                break;
+            case true when !_isDone:
+                other.transform.SetParent(null);
+                break;
         }
     }
 
