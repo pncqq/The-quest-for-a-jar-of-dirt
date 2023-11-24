@@ -22,8 +22,16 @@ public class CannonballRight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-            HealthSystem.Instance.TakeDamage(50);
+        if (!other.CompareTag("Player")) return;
+
+        //Knockback
+        other.GetComponent<BasicPlayerMovement>().knockbackTimer =
+            other.GetComponent<BasicPlayerMovement>().knockbackTotal;
+        other.GetComponent<BasicPlayerMovement>().knockbackRight =
+            other.transform.position.x <= transform.position.x;
+        
+        //Update health
+        HealthSystem.Instance.TakeDamage(50);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
