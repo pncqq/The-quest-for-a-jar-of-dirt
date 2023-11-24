@@ -82,16 +82,19 @@ namespace Dialogues
         //End dialogue
         public void EndDialogue()
         {
-            if (_endLevel)
-            {
-              PlayerPrefs.SetString("NextLevel", nextLevel);
-              PlayerPrefs.SetInt("EndLevel", 1);
-              PlayerPrefs.Save();
-            }
             _started = false;
             _waitForNext = false;
             StopAllCoroutines();
             ToggleWindow(false);
+            
+            if (_endLevel)
+            {
+                _endLevel = false;
+              PlayerPrefs.SetString("NextLevel", nextLevel);
+              PlayerPrefs.SetInt("EndLevel", 1);
+              PlayerPrefs.Save();
+            }
+           
            
 
         }

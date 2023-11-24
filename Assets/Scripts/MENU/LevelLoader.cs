@@ -12,6 +12,7 @@ namespace MENU
        [SerializeField] private Animator transition;
        [SerializeField] private float transitionTime = 1f;
        private static readonly int Start1 = Animator.StringToHash("Start");
+    
        
 
   
@@ -28,6 +29,7 @@ namespace MENU
         {
             PlayerPrefs.SetInt("EndLevel", 0);
             var nextLevel = PlayerPrefs.GetString("NextLevel");
+            PlayerPrefs.Save();
             StartCoroutine(LoadLevel(nextLevel));
         }
 
