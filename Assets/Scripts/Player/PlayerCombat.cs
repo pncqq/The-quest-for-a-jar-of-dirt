@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     //Fields
+    [SerializeField] private AudioSource swordAudioSource;
     [SerializeField] private float attackPower = 30;
     [SerializeField] private float attackRange = 0.5f;
     private float _lastAttackedAt;
@@ -41,7 +42,7 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
         Collider2D[] hitEnemies;
-
+        swordAudioSource.Play();
         //Detect enemies in range of attack. Hitbox z boku albo z dolu
         hitEnemies =
             Physics2D.OverlapCircleAll(

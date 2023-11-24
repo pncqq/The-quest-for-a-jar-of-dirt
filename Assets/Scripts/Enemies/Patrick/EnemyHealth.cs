@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] private enemyPatrol patrol;
     private GameObject player;
+    [SerializeField] private AudioSource deathAudioSource;
 
     //Animator fields
     private static readonly int IsHurt = Animator.StringToHash("isHurt");
@@ -51,6 +52,7 @@ public class EnemyHealth : MonoBehaviour
     private IEnumerator Die()
     {
         //Die animation
+        deathAudioSource.Play();
         _animator.SetBool(IsDead, true);
         Destroy(patrol);
         _rb.AddForce(new Vector2(transform.position.x, 100f));

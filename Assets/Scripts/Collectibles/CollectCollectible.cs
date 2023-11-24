@@ -4,6 +4,7 @@ using UnityEngine;
 public class CollectCollectible : MonoBehaviour
 {
     [SerializeField] private int _val = 1;
+    [SerializeField] private AudioSource collectAudioSource;
     private Animator _animator;
 
     private void Awake()
@@ -16,6 +17,7 @@ public class CollectCollectible : MonoBehaviour
         
         if (other.gameObject.CompareTag("Player"))
         {
+            collectAudioSource.Play();
             _animator.SetBool("IsCollected", true);
             
             switch (gameObject.tag)

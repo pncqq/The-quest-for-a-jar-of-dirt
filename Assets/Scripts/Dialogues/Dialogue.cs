@@ -21,6 +21,9 @@ namespace Dialogues
 
         private bool _endLevel;
         private string nextLevel;
+        public Animator transition;
+        public float transitionTime = 1f;
+        private static readonly int Start = Animator.StringToHash("Start");
 
         private void Awake()
         {
@@ -79,14 +82,19 @@ namespace Dialogues
         //End dialogue
         public void EndDialogue()
         {
-            if (_endLevel)
-            {
-                SceneManager.LoadScene(nextLevel);
-            }
             _started = false;
             _waitForNext = false;
             StopAllCoroutines();
             ToggleWindow(false);
+            
+            if (_endLevel)
+            {
+                _endLevel = false;
+              PlayerPrefs.SetString("NextLevel", nextLevel);
+              PlayerPrefs.SetInt("EndLevel", 1);
+              PlayerPrefs.Save();
+            }
+           
            
 
         }
@@ -98,7 +106,7 @@ namespace Dialogues
             if (dialogues[_index] == "End level")
             {
                 EndDialogue();
-                SceneManager.LoadScene(nextLevel);
+                
             }
             
             dialogueText.text += currentDialogue[_charIndex];
