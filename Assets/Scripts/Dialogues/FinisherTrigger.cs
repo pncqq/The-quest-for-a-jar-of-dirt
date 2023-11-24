@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ namespace Dialogues
         public int actualLevel;
         public string nextLevel;
         private bool _firstDialogue;
+        
 
         private void Awake()
         {
@@ -203,5 +205,7 @@ namespace Dialogues
 
             _firstDialogue = false;
         }
+
+
     }
 }
