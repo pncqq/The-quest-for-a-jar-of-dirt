@@ -288,7 +288,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 854631581
-  m_SortingLayer: -2
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: abba682cbcd8ae247be1d7b7fd3e2fbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -396,8 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88636b946c2c8c24c95b024cfc2727ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  _playerRB: {fileID: 3345327997886150399, guid: 54fd3747d8f074046bde801c87f24216, type: 3}
+  maxHealth: 100
   patrol: {fileID: 2794600952870795688}
 --- !u!1001 &8195854174210796106
 PrefabInstance:
@@ -463,6 +462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patryk Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5038167375321404340, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6258215860664200310, guid: 53e4adfc1e583234ba82226fdcd707d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.759
@@ -522,5 +525,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c73599a5bb51f48b0e61c84432e65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
-  playerMovement: {fileID: 0}
+  dmg: 18
