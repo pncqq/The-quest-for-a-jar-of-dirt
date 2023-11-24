@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CannonShoot : MonoBehaviour
 {
+    [SerializeField] private AudioSource shootAudioSource;
     [SerializeField] private float cooldown;
     [SerializeField] private float waitBefore;
     [SerializeField] private GameObject projectilePrefab;
@@ -41,6 +42,7 @@ public class CannonShoot : MonoBehaviour
         Instantiate(projectilePrefab, spawnPoint.transform.position, transform.rotation);
 
         //Effect anim and shoot anim
+        shootAudioSource.Play();
         effect.SetTrigger(Fire);
         _animator.SetBool(CanShoot, false);
 
@@ -49,7 +51,11 @@ public class CannonShoot : MonoBehaviour
 
         //Anim
         if (_playerInArea)
+        {
+            
             _animator.SetBool(CanShoot, true);
+        }
+            
     }
 
 

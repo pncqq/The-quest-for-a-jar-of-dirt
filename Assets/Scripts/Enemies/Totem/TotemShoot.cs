@@ -8,6 +8,7 @@ public class TotemShoot : MonoBehaviour
     [SerializeField] private float waitBefore;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private AudioSource shootAudioSource;
 
     private Animator _animator;
     private bool playerInArea;
@@ -24,6 +25,7 @@ public class TotemShoot : MonoBehaviour
     {
         
         Instantiate(projectilePrefab, spawnPoint.transform.position, transform.rotation);
+        shootAudioSource.Play();
         _animator.SetBool("Shoot", false);
         yield return new WaitForSeconds(cooldown);
         if (playerInArea)

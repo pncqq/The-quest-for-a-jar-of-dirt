@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    [SerializeField] private AudioSource deathAudioSource;
+    private bool _sound = false;
     public static HealthSystem Instance;
     public int maxHealth = 100;
     public int currentHealth;
@@ -21,6 +23,7 @@ public class HealthSystem : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         restartMenu.SetActive(false);
+        _sound = false;
     }
 
     private void Update()
@@ -28,6 +31,12 @@ public class HealthSystem : MonoBehaviour
         //Check if dead
         if (currentHealth <= 0)
         {
+            if (!_sound)
+            {
+                deathAudioSource.Play();
+                _sound = true;
+            }
+            
             IsDead = true;
             restartMenu.SetActive(true);
         }
