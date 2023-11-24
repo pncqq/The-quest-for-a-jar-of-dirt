@@ -40,19 +40,20 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-        Collider2D[] hitEnemies;
-
         //Detect enemies in range of attack. Hitbox z boku albo z dolu
-        hitEnemies =
-            Physics2D.OverlapCircleAll(
-                !BasicPlayerMovement.IsGroundedVar ? attackPointJumping.position : attackPoint.position, attackRange,
+        var enemy =
+            Physics2D.OverlapCircle(
+                !BasicPlayerMovement.IsGroundedVar
+                    ? attackPointJumping.position
+                    : attackPoint.position, attackRange,
                 enemyLayers);
-        
+
+
         //Damage enemies
-        foreach (var enemy in hitEnemies)
-        {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(attackPower * StrengthBoost);
-        }
+        if (enemy == null || !enemy.gameObject.activeInHierarchy) return;
+        
+        var enemyHealth = enemy.GetComponent<EnemyHealth>();
+        enemyHealth.TakeDamage(attackPower * StrengthBoost);
     }
 
     private void OnDrawGizmosSelected()
