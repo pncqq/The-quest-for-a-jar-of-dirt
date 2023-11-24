@@ -10,6 +10,8 @@ public class BasicPlayerMovement : MonoBehaviour
     internal static bool isWallJumpin;
 
 
+    [SerializeField] private AudioSource jumpAudioSource;
+    
     internal float Horizontal;
     private const float Speed = 5f;
     private const float JumpingPower = 7.5f;
@@ -121,7 +123,7 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, 0f); // unikniecie wysokiego wyskoku podczas 2 x spacja
         }
-
+        jumpAudioSource.Play();
         _rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
