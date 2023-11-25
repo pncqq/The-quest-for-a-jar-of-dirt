@@ -62,7 +62,7 @@ namespace Dialogues
                         break;
                     case 2:
                         _sentences.Clear();
-                        _sentences.Add("Nie denerwuj mnie");
+                        _sentences.Add("Nie denerwuj mnie...");
                         break;
                     case 3:
                         _sentences.Clear();
@@ -190,7 +190,7 @@ namespace Dialogues
                 case 2:
                     _sentences.Clear();
                     _sentences.Add("Nie dostales choroby morskiej?");
-                    _sentences.Add("Trudno. Widze ze masz nowy sprzet. Skad na niego miales?");
+                    _sentences.Add("Niewazne. Widze ze masz nowy sprzet. Skad na niego miales?");
                     _sentences.Add("Powodzi Ci sie, fajnie.");
                     _sentences.Add("To dawaj " + requiredCoins + " monet.");
                     break;

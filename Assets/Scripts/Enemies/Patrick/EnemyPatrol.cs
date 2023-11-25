@@ -14,7 +14,7 @@ public class enemyPatrol : MonoBehaviour
     private Transform _currPoint;
     private bool isIdle;
     public float speed;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,12 +38,13 @@ public class enemyPatrol : MonoBehaviour
                 _rb.velocity = new Vector2(speed, 0);
             }
         }
+
         if (Vector2.Distance(transform.position, _currPoint.position) < 0.5f && _currPoint == pointA.transform)
         {
             StartCoroutine(StartIdle());
             _currPoint = pointB.transform;
-            
         }
+
         if (Vector2.Distance(transform.position, _currPoint.position) < 0.5f && _currPoint == pointB.transform)
         {
             StartCoroutine(StartIdle());
@@ -57,7 +58,7 @@ public class enemyPatrol : MonoBehaviour
         Vector2 tmp = _rb.velocity;
         _animator.SetBool("IsPatrolling", false);
         _rb.velocity = new Vector2(0, 0);
-        yield return new WaitForSeconds(Random.Range(1f,3f));
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
         _rb.velocity = tmp;
         Flip();
         _animator.SetBool("IsPatrolling", true);
@@ -70,6 +71,7 @@ public class enemyPatrol : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
