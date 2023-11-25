@@ -36,14 +36,17 @@ public class EnemyHealth : MonoBehaviour
     {
         _currentHealth -= damage;
         _animator.SetTrigger(IsHurt);
-        Vector2 direction = new Vector2((transform.position.x - player.GetComponent<Rigidbody2D>().transform.position.x)*150f, 75f);
-        
+        Vector2 direction =
+            new Vector2((transform.position.x - player.GetComponent<Rigidbody2D>().transform.position.x) * 150f, 75f);
+
         _rb.AddForce(direction);
-        
+
 
         //If enemy dies
         if (_currentHealth <= 0)
         {
+            deathAudioSource.Play();
+
             //Die
             StartCoroutine(Die());
         }
@@ -52,7 +55,6 @@ public class EnemyHealth : MonoBehaviour
     private IEnumerator Die()
     {
         //Die animation
-        deathAudioSource.Play();
         _animator.SetBool(IsDead, true);
         Destroy(patrol);
         _rb.AddForce(new Vector2(transform.position.x, 100f));
@@ -60,6 +62,7 @@ public class EnemyHealth : MonoBehaviour
         _collider2D.enabled = false;
         enabled = false;
         yield return new WaitForSeconds(2f);
+
         Destroy(transform.parent.gameObject);
     }
 }

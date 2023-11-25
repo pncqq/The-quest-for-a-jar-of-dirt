@@ -51,9 +51,10 @@ public class PlayerCombat : MonoBehaviour
 
         //Damage enemies
         if (enemy == null || !enemy.gameObject.activeInHierarchy) return;
-        
         var enemyHealth = enemy.GetComponent<EnemyHealth>();
-        enemyHealth.TakeDamage(attackPower * StrengthBoost);
+
+        if (enemyHealth != null)
+            enemyHealth.TakeDamage(attackPower * StrengthBoost);
     }
 
     private void OnDrawGizmosSelected()
