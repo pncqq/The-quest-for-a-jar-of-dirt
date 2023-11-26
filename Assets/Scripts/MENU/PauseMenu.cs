@@ -8,7 +8,8 @@ namespace MENU
     public class PauseMenu : MonoBehaviour
     {
         public GameObject pauseMenuUI;
-        public TextMeshProUGUI diamondLevel; // Przypisz tutaj twój panel/menu pauzy
+        public TextMeshProUGUI diamondLevel;
+        [SerializeField] private AudioSource clickSound;
 
         private bool isPaused = false;
         
@@ -34,13 +35,15 @@ namespace MENU
 
         private void Resume()
         {
-            pauseMenuUI.SetActive(false); // Ukryj menu pauzy
-            Time.timeScale = 1f; // Wznów normalny bieg czasu
+            clickSound.Play();
+            pauseMenuUI.SetActive(false); 
+            Time.timeScale = 1f; 
             isPaused = false;
         }
 
         private void  Pause()
         {
+            clickSound.Play();
             CountDiamonds();
             pauseMenuUI.SetActive(true); 
             Time.timeScale = 0f; 

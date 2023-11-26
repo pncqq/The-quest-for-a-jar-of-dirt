@@ -7,6 +7,8 @@ public class HealthPotion : MonoBehaviour
 {
     private Animator _animator;
 
+    [SerializeField] private AudioSource collectSound;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -20,6 +22,7 @@ public class HealthPotion : MonoBehaviour
 
     private void Use()
     {
+        collectSound.Play();
         HealthSystem.Instance.Heal(50);
         _animator.SetBool("IsUsed", true);
     }

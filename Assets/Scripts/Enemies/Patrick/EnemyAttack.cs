@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private int dmg;
+    [SerializeField] private AudioSource punchAudioSource;
     private GameObject player;
 
     private void Start()
@@ -25,6 +26,7 @@ public class EnemyAttack : MonoBehaviour
             {
                 player.GetComponent<BasicPlayerMovement>().knockbackRight = false;
             }
+            punchAudioSource.Play();
             HealthSystem.Instance.TakeDamage(dmg);
         }
     }
