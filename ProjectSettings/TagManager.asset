@@ -14,6 +14,8 @@ TagManager:
   - Sword
   - CollapsingPlatform
   - CannonBall
+  - CameraConf
+  - Boat
   layers:
   - Default
   - TransparentFX

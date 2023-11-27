@@ -33,7 +33,7 @@ public class ProjectileRight : MonoBehaviour
             HealthSystem.Instance.TakeDamage(10);
         }
 
-        if (!other.CompareTag("Enemy"))
+        if (!other.CompareTag("Enemy") && !other.CompareTag("CameraConf") && !other.CompareTag("Boat"))
             Destroy(gameObject);
 
     }

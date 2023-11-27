@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4560598052231215828}
   m_Layer: 0
   m_Name: Sail
-  m_TagString: Enemy
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 123540164053572893}
   m_Layer: 0
   m_Name: Boat
-  m_TagString: Enemy
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 4711326965265644945}
   m_Layer: 6
   m_Name: BottomOfBoat
-  m_TagString: Enemy
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 3908256186077776191}
   m_Layer: 0
   m_Name: Wheel
-  m_TagString: Enemy
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 5749542691330439567}
   m_Layer: 0
   m_Name: BoatAndPoints
-  m_TagString: Enemy
+  m_TagString: Boat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
