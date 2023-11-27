@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OpenChest : MonoBehaviour
@@ -7,6 +9,7 @@ public class OpenChest : MonoBehaviour
     [SerializeField] private int dVal;
     [SerializeField] private int scVal;
     [SerializeField] private int gcVal;
+    [SerializeField] private TMP_Text chestText;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -25,14 +28,30 @@ public class OpenChest : MonoBehaviour
             }
             isOpen = true;
             animator.SetBool("IsOpen", isOpen);
-            if(dVal > 0)
+            if (dVal > 0)
+            {
                 CollectibleCounter.instance.IncreaseCount(dVal, 'd');
-            if(gcVal > 0)
+                StartCoroutine(showText("diamond", dVal));
+            }
+            if (gcVal > 0)
+            {
                 CollectibleCounter.instance.IncreaseCount(gcVal, 'g');
-            if(scVal > 0)
+                StartCoroutine(showText("gold coins", gcVal));
+            }
+            if (scVal > 0)
+            { 
                 CollectibleCounter.instance.IncreaseCount(scVal, 's');
+                StartCoroutine(showText("silver coins", scVal));
+            }
+                
         }
     }
 
-  
+    private IEnumerator showText(string collectible, int amount)
+    {
+        yield return new WaitForSeconds(0.5f);
+        chestText.text = "+" + amount + " " + collectible;
+        yield return new WaitForSeconds(3f);
+        chestText.text = "";
+    }
 }
