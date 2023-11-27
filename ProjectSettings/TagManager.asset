@@ -63,6 +63,9 @@ TagManager:
   - name: Palm_Back
     uniqueID: 2959745227
     locked: 0
+  - name: Ship_Decorations
+    uniqueID: 3728410447
+    locked: 0
   - name: Enemy
     uniqueID: 854631581
     locked: 0
