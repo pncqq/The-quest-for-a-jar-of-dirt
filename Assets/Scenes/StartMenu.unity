@@ -696,7 +696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6998341438328269668, guid: 6af71e107dc756143b24f70d78998736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Scenes/Levels/Level3_placeholder
+      value: Scenes/Levels/Level3
       objectReference: {fileID: 0}
     - target: {fileID: 6998341438328269668, guid: 6af71e107dc756143b24f70d78998736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1915,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6998341438328269668, guid: 6af71e107dc756143b24f70d78998736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Scenes/Levels/Level2_placeholder
+      value: Scenes/Levels/Level2
       objectReference: {fileID: 0}
     - target: {fileID: 6998341438328269668, guid: 6af71e107dc756143b24f70d78998736, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
