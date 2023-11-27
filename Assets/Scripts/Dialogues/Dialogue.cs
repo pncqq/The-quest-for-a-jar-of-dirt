@@ -10,7 +10,7 @@ namespace Dialogues
     {
         public GameObject window;
         public GameObject indicator;
-        public List<string> dialogues;
+        private List<string> dialogues;
         public TMP_Text dialogueText;
         public float writingSpeed = 0.05f;
 
@@ -45,10 +45,10 @@ namespace Dialogues
         {
             if (sentences != null && sentences.Count > 0)
             {
-                _endLevel  = sentences.Count >= 2 && sentences[(dialogues.Count - 2)] == "End level";
+                _endLevel  = sentences.Count >= 2 && sentences[^2] == "End level";
                 if (_endLevel)
                 {
-                    nextLevel = sentences[dialogues.Count - 1];
+                    nextLevel = sentences[^1];
                     
                 }
                 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace Dialogues
 {
@@ -16,7 +12,7 @@ namespace Dialogues
         public int actualLevel;
         public string nextLevel;
         private bool _firstDialogue;
-        
+
 
         private void Awake()
         {
@@ -35,6 +31,12 @@ namespace Dialogues
             {
                 RemoveAllDiamonds();
             }
+        }
+
+        private void Update()
+        {
+            if (_playerDetected && Input.GetKeyDown(KeyCode.E))
+                dialogueScript.StartDialogueWithSentences(_sentences);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -147,6 +149,17 @@ namespace Dialogues
             }
         }
 
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _playerDetected = false;
+
+                dialogueScript.ToggleIndicator(_playerDetected);
+                dialogueScript.EndDialogue();
+            }
+        }
+
         private static void RemoveAllDiamonds()
         {
             var diamonds = GameObject.FindGameObjectsWithTag("Diamond");
@@ -157,23 +170,6 @@ namespace Dialogues
             }
         }
 
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                _playerDetected = false;
-                dialogueScript.ToggleIndicator(_playerDetected);
-                dialogueScript.EndDialogue();
-            }
-        }
-
-        private void Update()
-        {
-            if (_playerDetected && Input.GetKeyDown(KeyCode.E))
-            {
-                dialogueScript.StartDialogueWithSentences(_sentences);
-            }
-        }
 
         //FILIP
         private void DefaultDialogue()
@@ -205,7 +201,5 @@ namespace Dialogues
 
             _firstDialogue = false;
         }
-
-
     }
 }
