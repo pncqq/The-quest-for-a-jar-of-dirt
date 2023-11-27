@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   posA: {fileID: 1263973167711352593}
   posB: {fileID: 8720845118711131552}
-  speed: 5
+  speed: 2
 --- !u!61 &4758912010108761580
 BoxCollider2D:
   m_ObjectHideFlags: 0
