@@ -2471,6 +2471,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3970888029446269204, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
+      propertyPath: gcVal
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4603029419303924307, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
       propertyPath: m_Name
       value: Chest
@@ -2478,7 +2482,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1193255481023703604, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
 --- !u!4 &225622558 stripped
 Transform:
@@ -6342,6 +6349,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3192885377516069499, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
+      propertyPath: dVal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3350807342558755404, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
       propertyPath: m_Name
       value: LockedChest
@@ -6349,7 +6360,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3477358315589615566, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
 --- !u!4 &461318481 stripped
 Transform:
