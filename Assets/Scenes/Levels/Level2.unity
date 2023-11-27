@@ -656,7 +656,7 @@ Transform:
   m_GameObject: {fileID: 77192260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.4891567, y: 2.2920647, z: -23.353333}
+  m_LocalPosition: {x: 5.4891596, y: 2.2920647, z: -23.353333}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2478,7 +2478,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1193255481023703604, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c3791c653872d954d8413d641d8f5dd1, type: 3}
 --- !u!4 &225622558 stripped
 Transform:
@@ -6349,7 +6352,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3477358315589615566, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 622f3bdfeab82864495f2e4b7f91829e, type: 3}
 --- !u!4 &461318481 stripped
 Transform:
@@ -76855,6 +76861,18 @@ PrefabInstance:
       propertyPath: transition
       value: 
       objectReference: {fileID: 853750740}
+    - target: {fileID: 1148723169989055168, guid: 6959a7298afa7644a99d3335a7f9e9f6, type: 3}
+      propertyPath: nextLevel
+      value: Assets/Scenes/Levels/Level3.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1148723169989055168, guid: 6959a7298afa7644a99d3335a7f9e9f6, type: 3}
+      propertyPath: actualLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1148723169989055168, guid: 6959a7298afa7644a99d3335a7f9e9f6, type: 3}
+      propertyPath: requiredCoins
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2725067578018082989, guid: 6959a7298afa7644a99d3335a7f9e9f6, type: 3}
       propertyPath: m_Name
       value: Finisher
