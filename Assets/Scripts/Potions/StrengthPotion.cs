@@ -6,6 +6,7 @@ public class StrengthPotion : MonoBehaviour
     public PlayerCombat playerCombat;
     private Animator _animator;
     private static readonly int IsUsed = Animator.StringToHash("IsUsed");
+    [SerializeField] private AudioSource collectSound;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class StrengthPotion : MonoBehaviour
 
     private void Use()
     {
+        collectSound.Play();
         //Boost strength
         playerCombat.StrengthBoost = 1.3f;
         _animator.SetBool(IsUsed, true);

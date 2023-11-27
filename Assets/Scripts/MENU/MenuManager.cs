@@ -9,6 +9,7 @@ namespace MENU
     public class MenuManager : MonoBehaviour
     {
         // Start is called before the first frame update
+        [SerializeField] private AudioSource clickSound;
         [SerializeField] private GameObject _menuView;
         [SerializeField] private GameObject _levelsView;
         public Button level2; // Przycisk do aktywacji
@@ -19,7 +20,6 @@ namespace MENU
 
         public void LevelCompleted2()
         {
-            Debug.Log( PlayerPrefs.GetInt("Level1"));
             level2.interactable = PlayerPrefs.GetInt("Level1") == 1; // Aktywuje przycisk
             level3.interactable = PlayerPrefs.GetInt("Level2") == 1; // Aktywuje przycisk
         }
@@ -37,6 +37,7 @@ namespace MENU
 
         public void StartClicked()
         {
+            clickSound.Play();
             LevelCompleted2();
             DiamondsUpdate();
             _menuView.SetActive(false);
@@ -45,11 +46,13 @@ namespace MENU
 
         public void ClearGame()
         {
+            clickSound.Play();
             PlayerPrefs.DeleteAll();
         }
 
         public void ExitClicked()
         {
+            clickSound.Play();
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
 #else
@@ -63,11 +66,13 @@ namespace MENU
 
         public void LoadLevel(string sceneName)
         {
+            clickSound.Play();
             SceneManager.LoadScene(sceneName);
         }
 
         public void BackClicked()
         {
+            clickSound.Play();
             _menuView.SetActive(true);
             _levelsView.SetActive(false);
         }
