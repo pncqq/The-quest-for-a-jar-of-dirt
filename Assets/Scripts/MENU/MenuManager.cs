@@ -31,6 +31,7 @@ namespace MENU
         {
             _menuView.SetActive(true);
             _levelsView.SetActive(false);
+            DiamondsUpdate();
         }
 
         #region Main view
