@@ -189,7 +189,7 @@ public class BasicPlayerMovement : MonoBehaviour
         {
             //FILIP
             isWallJumpin = true;
-
+            jumpAudioSource.Play();
             _isWallJumping = true;
             _rb.velocity = new Vector2(_wallJumpingDirection * _wallJumpingPower.x, _wallJumpingPower.y);
             _wallJumpingCounter = 0f;
