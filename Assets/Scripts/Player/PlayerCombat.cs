@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
     //Fields
     [SerializeField] private float attackPower = 30;
     [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private AudioSource attackSound;
     private float _lastAttackedAt;
     internal float StrengthBoost = 1;
     public Transform attackPoint;
@@ -40,6 +41,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
+        attackSound.Play();
         //Detect enemies in range of attack. Hitbox z boku albo z dolu
         var enemy =
             Physics2D.OverlapCircle(

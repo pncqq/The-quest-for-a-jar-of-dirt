@@ -270,9 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4431ae65be0e7fd40bd1a890de5e939d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordAudioSource: {fileID: 5116687479153111672}
   attackPower: 30
   attackRange: 0.24
+  attackSound: {fileID: 5116687479153111672}
   attackPoint: {fileID: 1450068095413537028}
   attackPointJumping: {fileID: 6902230442753969296}
   enemyLayers:
