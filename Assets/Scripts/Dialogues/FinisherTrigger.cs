@@ -36,7 +36,11 @@ namespace Dialogues
         private void Update()
         {
             if (_playerDetected && Input.GetKeyDown(KeyCode.E))
+            {
+                _firstDialogue = false;
                 dialogueScript.StartDialogueWithSentences(_sentences);
+            }
+                
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -51,23 +55,24 @@ namespace Dialogues
             if (_firstDialogue)
             {
                 DefaultDialogue();
-                return;
+            }
+            if (!_firstDialogue)
+            {
+                _sentences.Clear();
             }
 
             if (CollectibleCounter.instance.gCoinCount == 0)
             {
+               
                 switch (actualLevel)
                 {
                     case 1:
-                        _sentences.Clear();
                         _sentences.Add("Zartujesz sobie? Jestes biedny!");
                         break;
                     case 2:
-                        _sentences.Clear();
                         _sentences.Add("Nie denerwuj mnie...");
                         break;
                     case 3:
-                        _sentences.Clear();
                         _sentences.Add(
                             "Kierowniku... Chcesz zebym umarl z glodu? Az mi się rece trzesa. " +
                             "I to ze zlosci, nie z delirki.");
@@ -88,7 +93,6 @@ namespace Dialogues
                         }
 
                         Debug.Log(PlayerPrefs.GetInt("Diamonds1"));
-                        _sentences.Clear();
                         _sentences.Add("No, i teraz mozemy rozmawiac...");
                         _sentences.Add("End level");
                         _sentences.Add(nextLevel);
@@ -103,8 +107,7 @@ namespace Dialogues
                         }
 
                         PlayerPrefs.SetInt("Diamonds2", CollectibleCounter.instance.dCount);
-
-                        _sentences.Clear();
+                        
                         _sentences.Add("No, i teraz mozemy rozmawiac...");
                         _sentences.Add("End level");
                         _sentences.Add(nextLevel);
@@ -119,7 +122,6 @@ namespace Dialogues
                         }
 
                         PlayerPrefs.SetInt("Diamonds3", CollectibleCounter.instance.dCount);
-                        _sentences.Clear();
                         _sentences.Add("Szerokiej drogi  czlowiecze! Niech Ci sie wiedzie!");
                         _sentences.Add("End level");
                         _sentences.Add(nextLevel);
@@ -134,15 +136,12 @@ namespace Dialogues
                 switch (actualLevel)
                 {
                     case 1:
-                        _sentences.Clear();
                         _sentences.Add("Za malo! Przynies wiecej!");
                         break;
                     case 2:
-                        _sentences.Clear();
                         _sentences.Add("Za malo! Wracaj na te lodki!");
                         break;
                     case 3:
-                        _sentences.Clear();
                         _sentences.Add("Szefie, super, ale to nawet na rum nie starczy.");
                         break;
                 }
@@ -199,7 +198,7 @@ namespace Dialogues
                     break;
             }
 
-            _firstDialogue = false;
+            
         }
     }
 }
