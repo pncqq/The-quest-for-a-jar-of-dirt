@@ -17,6 +17,9 @@ namespace MENU
         public TextMeshProUGUI diamondLevel1;
         public TextMeshProUGUI diamondLevel2;
         public TextMeshProUGUI diamondLevel3;
+        
+        
+        
 
         public void LevelCompleted2()
         {
@@ -32,6 +35,10 @@ namespace MENU
             _menuView.SetActive(true);
             _levelsView.SetActive(false);
             DiamondsUpdate();
+            if (!PlayerPrefs.HasKey("musicVolume"))
+            {
+                PlayerPrefs.SetFloat("musicVolume", 0.5f);
+            }
         }
 
         #region Main view
@@ -54,11 +61,8 @@ namespace MENU
         public void ExitClicked()
         {
             clickSound.Play();
-#if UNITY_EDITOR
             EditorApplication.isPlaying = false;
-#else
-            Aplication.Quit();
-#endif
+
         }
     
         #endregion

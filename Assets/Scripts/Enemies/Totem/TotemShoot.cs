@@ -57,4 +57,8 @@ public class TotemShoot : MonoBehaviour
             _animator.SetBool("Shoot", false);
         }
     }
+  
+
+    
+
 }

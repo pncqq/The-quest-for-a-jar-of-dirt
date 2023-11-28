@@ -30,11 +30,7 @@ namespace MENU
         public void QuitGame()
         {
             clickSound.Play();
-        #if UNITY_EDITOR
                     EditorApplication.isPlaying = false;
-        #else
-                            Aplication.Quit();
-        #endif
                 }
 
         public void RestartGame()
