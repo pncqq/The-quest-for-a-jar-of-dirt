@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 4119754017795418639}
-  diamondLevel: {fileID: 0}
+  diamondLevel: {fileID: 888893220887896167}
   clickSound: {fileID: 5211472685953754917}
 --- !u!82 &5211472685953754917
 AudioSource:
