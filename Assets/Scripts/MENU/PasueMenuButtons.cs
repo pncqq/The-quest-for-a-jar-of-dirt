@@ -30,8 +30,8 @@ namespace MENU
         public void QuitGame()
         {
             clickSound.Play();
-                    EditorApplication.isPlaying = false;
-                }
+            Application.Quit();
+        }
 
         public void RestartGame()
         {

@@ -61,7 +61,7 @@ namespace MENU
         public void ExitClicked()
         {
             clickSound.Play();
-            EditorApplication.isPlaying = false;
+            Application.Quit();
 
         }
     
