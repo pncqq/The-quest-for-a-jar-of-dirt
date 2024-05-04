@@ -33,7 +33,7 @@ namespace MENU
         #if UNITY_EDITOR
                     EditorApplication.isPlaying = false;
         #else
-                            Aplication.Quit();
+                            Application.Quit();
         #endif
                 }
 
